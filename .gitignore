@@ -8,3 +8,6 @@
 !/Assets/*/*.prefab
 !/Assets/*/*.unity
 
+!/Assets/Scripts/**
+*.meta
+**/.idea
