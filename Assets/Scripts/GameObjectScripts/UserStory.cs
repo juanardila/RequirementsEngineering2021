@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions;
+
 /**
  * this class represents the user story game entity
  */
 public class UserStory : MonoBehaviour
 {
-
-    public int id;
-    public int points;
-    public string text;
     private UserStoryInputHandler _inputHandler;
-    
+    private CardRenderComponent _renderComponent;
+    private UserStoryGameplay _userStoryGameplay;
+    public const string TAG = "UserStory";
     private void Start()
     {
-        _inputHandler = new UserStoryInputHandler(GetComponent<Transform>(), this);
+        Assert.AreEqual(tag, TAG);
+        _userStoryGameplay = new UserStoryGameplay();
+        _renderComponent = new CardRenderComponent(GetComponent<SpriteRenderer>());
+        _inputHandler = new UserStoryInputHandler(GetComponent<Transform>(), _renderComponent, this);
+        
     }
 
     private void OnMouseDown()
@@ -28,6 +32,11 @@ public class UserStory : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         _inputHandler.onRelase();        
+    }
+
+    public UserStoryGameplay getGameplayComponent()
+    {
+        return _userStoryGameplay;
     }
 
 }
