@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class ColumnGameplayComponent
 {
@@ -12,8 +14,9 @@ public class ColumnGameplayComponent
     public const string DONE_TAG = "Done";
 
     private string columnTag; //The type of column
+    private ColumnRenderComponent columnRenderComponent;
 
-    public ColumnGameplayComponent(string tag)
+    public ColumnGameplayComponent(string tag, ColumnRenderComponent columnRenderComponent)
     {
         switch (tag)
         {
@@ -26,13 +29,21 @@ public class ColumnGameplayComponent
             default:
                 throw new Exception("This tag does not exists");
         }
+
+        this.columnRenderComponent = columnRenderComponent;
     }
 
     public string getColumnTag()
     {
         return columnTag;
     }
-    
+
+    public void add(UserStoryGameplayComponent userStory, Transform userStoryTransform)
+    {
+        Debug.Log("adding user story to column");
+        
+        columnRenderComponent.paintToDefault();
+    }
     
     
     

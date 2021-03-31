@@ -38,9 +38,9 @@ public class UserStoryInputHandler
     {
         draggableInputHandler.onRelase();
         cardRenderComponent.putDownCard();
-        if (userStoryGameplayComponent.wasMoved())
+        if (userStoryGameplayComponent.wasDraggedIntoAColumn())
         {
-            //assign card to column
+            userStoryGameplayComponent.moveToColumn();
         }
         else
         {

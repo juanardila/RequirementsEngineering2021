@@ -23,9 +23,12 @@ public class CollumnCollisionComponent
         {
             UserStoryGameplayComponent userStoryGameplay = other.gameObject.GetComponent<UserStory>()
                                                     .getGameplayComponent();
+            UserStoryInteractionComponent userStoryInteraction = other.gameObject.GetComponent<UserStory>()
+                                                    .getInteractionComponent();
             if (userStoryGameplay.canBeMovedTo(columnGameplayComponent.getColumnTag()))
             {
                 columnRenderComponent.paintToAllowNewStory();
+                userStoryInteraction.beingDraggedOver(columnGameplayComponent.getColumnTag());
             }
         }
     }
@@ -35,6 +38,8 @@ public class CollumnCollisionComponent
         if (other.collider.CompareTag(UserStory.TAG))
         {
             columnRenderComponent.paintToDefault();
+            other.gameObject.GetComponent<UserStory>().getInteractionComponent()
+                .resetDraggin(columnGameplayComponent.getColumnTag());
         }
     }
     

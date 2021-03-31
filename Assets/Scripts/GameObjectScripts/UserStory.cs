@@ -39,6 +39,10 @@ public class UserStory : MonoBehaviour
     public UserStoryGameplayComponent getGameplayComponent()
     {
         return _userStoryGameplayComponent;
+    }    
+    public UserStoryInteractionComponent getInteractionComponent()
+    {
+        return _userStoryInteractionComponent;
     }
 
 }

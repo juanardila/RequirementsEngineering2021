@@ -9,6 +9,7 @@ using UnityEngine;
 public class UserStoryGameplayComponent
 {
     private UserStoryInteractionComponent userStoryInteractionComponent;
+    private Transform userStoryTransform;
 
     public int id;
     public int points;
@@ -23,10 +24,10 @@ public class UserStoryGameplayComponent
         this.userStoryInteractionComponent = userStoryInteractionComponent;
     }
 
-    public void moveTo(string newColumn)
+    public void moveToColumn()
     {
-        currentColumn = newColumn;
-        
+        currentColumn = userStoryInteractionComponent.draggedToColumn();
+        Board.getInstance().getColumn(currentColumn).add(this, userStoryTransform);
     }
     
     public bool canBeMovedTo(string newColumn)
@@ -44,7 +45,7 @@ public class UserStoryGameplayComponent
         return canBeMoved;
     }
 
-    public bool wasMoved()
+    public bool wasDraggedIntoAColumn()
     {
         string newColumn = userStoryInteractionComponent.draggedToColumn();
         //if it is different of current column then the card was moved

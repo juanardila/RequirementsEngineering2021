@@ -8,8 +8,8 @@ public class Column : MonoBehaviour
 
     private void Start()
     {
-        _columnGameplayComponent = new ColumnGameplayComponent(tag);
         _columnRenderComponent = new ColumnRenderComponent(GetComponent<SpriteRenderer>());
+        _columnGameplayComponent = new ColumnGameplayComponent(tag, _columnRenderComponent);
         _columnCollisionComponent = new CollumnCollisionComponent(_columnRenderComponent, _columnGameplayComponent);
 
     }
@@ -22,5 +22,10 @@ public class Column : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
         _columnCollisionComponent.onCollisionExit(other);
+    }
+
+    public ColumnGameplayComponent getGameplayComponent()
+    {
+        return _columnGameplayComponent;
     }
 }

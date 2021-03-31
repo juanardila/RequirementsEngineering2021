@@ -11,14 +11,15 @@
         draggedIntoColumn = column;
     }
 
-    public void stopDragginOver(string column)
+    
+    public void resetDraggin(string column)
     {
         if (column == draggedIntoColumn)
         {
             draggedIntoColumn = null;
         }
     }
-
+    
     public string draggedToColumn()
     {
         return draggedIntoColumn;
