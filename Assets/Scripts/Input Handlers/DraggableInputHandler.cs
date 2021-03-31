@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Numerics;
+using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 /**
  * This class handles the dragging logic of an input event
@@ -6,6 +8,8 @@
 public class DraggableInputHandler
 {
     protected static Vector3 prevMousePosition;
+
+    private Vector3 initialDragPosition;
 
     public enum STATES {
         IDLE,
@@ -18,6 +22,7 @@ public class DraggableInputHandler
     public DraggableInputHandler()
     {
         state = STATES.IDLE;
+        initialDragPosition = Vector3.zero;
     }
     
     
@@ -33,11 +38,22 @@ public class DraggableInputHandler
         delta.z = 0; //do not move in z
         return delta;
     }
-
+    
+    
     public void onClick()
     {
         state = STATES.SELECTED;
         prevMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
+    }
+    
+    /**
+     * Changes click states and saves the initial drag position
+     */
+    public void onClick(Vector3 initialPosition)
+    {
+        onClick();
+        initialDragPosition = initialPosition;
     }
 
     public void onDrag()
@@ -60,6 +76,11 @@ public class DraggableInputHandler
                 state = STATES.IDLE;
                 break;
         }
+    }
+    
+    public Vector3 getInitialDragPosition()
+    {
+        return initialDragPosition;
     }
 
 

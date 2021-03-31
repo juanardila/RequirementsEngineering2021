@@ -8,15 +8,17 @@ public class UserStory : MonoBehaviour
 {
     private UserStoryInputHandler _inputHandler;
     private CardRenderComponent _renderComponent;
-    private UserStoryGameplay _userStoryGameplay;
+    private UserStoryGameplayComponent _userStoryGameplayComponent;
+    private UserStoryInteractionComponent _userStoryInteractionComponent;
     public const string TAG = "UserStory";
+    
     private void Start()
     {
         Assert.AreEqual(tag, TAG);
-        _userStoryGameplay = new UserStoryGameplay();
+        _userStoryInteractionComponent = new UserStoryInteractionComponent();
+        _userStoryGameplayComponent = new UserStoryGameplayComponent(_userStoryInteractionComponent);
         _renderComponent = new CardRenderComponent(GetComponent<SpriteRenderer>());
-        _inputHandler = new UserStoryInputHandler(GetComponent<Transform>(), _renderComponent, this);
-        
+        _inputHandler = new UserStoryInputHandler(GetComponent<Transform>(), _renderComponent, _userStoryGameplayComponent);
     }
 
     private void OnMouseDown()
@@ -34,9 +36,9 @@ public class UserStory : MonoBehaviour
         _inputHandler.onRelase();        
     }
 
-    public UserStoryGameplay getGameplayComponent()
+    public UserStoryGameplayComponent getGameplayComponent()
     {
-        return _userStoryGameplay;
+        return _userStoryGameplayComponent;
     }
 
 }

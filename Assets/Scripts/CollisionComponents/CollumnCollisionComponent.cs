@@ -21,7 +21,7 @@ public class CollumnCollisionComponent
     {
         if (other.collider.CompareTag(UserStory.TAG))
         {
-            UserStoryGameplay userStoryGameplay = other.gameObject.GetComponent<UserStory>()
+            UserStoryGameplayComponent userStoryGameplay = other.gameObject.GetComponent<UserStory>()
                                                     .getGameplayComponent();
             if (userStoryGameplay.canBeMovedTo(columnGameplayComponent.getColumnTag()))
             {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Lumin;
 
 
 /**
@@ -7,23 +8,22 @@ using UnityEngine;
 public class UserStoryInputHandler
 {
     private Transform transform;
-    private UserStory userStory;
     private DraggableInputHandler draggableInputHandler;
     private CardRenderComponent cardRenderComponent;
-
+    private UserStoryGameplayComponent userStoryGameplayComponent;
     public UserStoryInputHandler(Transform transform, CardRenderComponent cardRenderComponent,
-        UserStory userStory)
+        UserStoryGameplayComponent userStoryGameplayComponent)
     {
         this.transform = transform;
         this.cardRenderComponent = cardRenderComponent;
-        this.userStory = userStory;
         draggableInputHandler = new DraggableInputHandler();
-        
+        this.userStoryGameplayComponent = userStoryGameplayComponent;
+
     }
 
     public void onClick()
     {
-        draggableInputHandler.onClick(); //Let base class control dragging states
+        draggableInputHandler.onClick(transform.localPosition); //Let base class control dragging states
         cardRenderComponent.raiseCard();
         
     }
@@ -38,6 +38,15 @@ public class UserStoryInputHandler
     {
         draggableInputHandler.onRelase();
         cardRenderComponent.putDownCard();
+        if (userStoryGameplayComponent.wasMoved())
+        {
+            //assign card to column
+        }
+        else
+        {
+            transform.position = draggableInputHandler.getInitialDragPosition();
+        }
+        
         /*
          TODO: Control the allowed dragging areas using UserStory state & constrains from columns
                 then call the appropriate event trigger for ex. if user story is dropped in backlog

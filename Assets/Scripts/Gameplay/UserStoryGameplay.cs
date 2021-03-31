@@ -6,22 +6,27 @@ using UnityEngine;
  * This class handles everything related to the gameplay
  * of an user story
  */
-public class UserStoryGameplay
+public class UserStoryGameplayComponent
 {
+    private UserStoryInteractionComponent userStoryInteractionComponent;
+
     public int id;
     public int points;
     public string text;
-
     private string currentColumn;
 
-    public UserStoryGameplay()
+    
+
+    public UserStoryGameplayComponent(UserStoryInteractionComponent userStoryInteractionComponent)
     {
         currentColumn = ColumnGameplayComponent.TODO_TAG;
+        this.userStoryInteractionComponent = userStoryInteractionComponent;
     }
 
     public void moveTo(string newColumn)
     {
         currentColumn = newColumn;
+        
     }
     
     public bool canBeMovedTo(string newColumn)
@@ -38,4 +43,19 @@ public class UserStoryGameplay
         }
         return canBeMoved;
     }
+
+    public bool wasMoved()
+    {
+        string newColumn = userStoryInteractionComponent.draggedToColumn();
+        //if it is different of current column then the card was moved
+        return  newColumn != null &&
+                newColumn != currentColumn;
+    }
+    
+    
+    
+    
+    
+    
+    
 }
