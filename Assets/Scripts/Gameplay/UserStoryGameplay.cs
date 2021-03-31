@@ -18,14 +18,16 @@ public class UserStoryGameplayComponent
 
     
 
-    public UserStoryGameplayComponent(UserStoryInteractionComponent userStoryInteractionComponent)
+    public UserStoryGameplayComponent(UserStoryInteractionComponent userStoryInteractionComponent, Transform userStoryTransform)
     {
-        currentColumn = ColumnGameplayComponent.TODO_TAG;
+        currentColumn = ColumnGameplayComponent.BACLOG_TAG;
         this.userStoryInteractionComponent = userStoryInteractionComponent;
+        this.userStoryTransform = userStoryTransform;
     }
 
     public void moveToColumn()
     {
+        Board.getInstance().getColumn(currentColumn).delete(this.id);
         currentColumn = userStoryInteractionComponent.draggedToColumn();
         Board.getInstance().getColumn(currentColumn).add(this, userStoryTransform);
     }
@@ -52,11 +54,10 @@ public class UserStoryGameplayComponent
         return  newColumn != null &&
                 newColumn != currentColumn;
     }
-    
-    
-    
-    
-    
-    
-    
+
+    public string getColumn()
+    {
+        return currentColumn;
+    }
+
 }

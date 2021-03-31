@@ -39,7 +39,7 @@ public class CollumnCollisionComponent
         {
             columnRenderComponent.paintToDefault();
             other.gameObject.GetComponent<UserStory>().getInteractionComponent()
-                .resetDraggin(columnGameplayComponent.getColumnTag());
+                .resetDragging(columnGameplayComponent.getColumnTag());
         }
     }
     

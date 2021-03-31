@@ -11,13 +11,15 @@ public class UserStoryInputHandler
     private DraggableInputHandler draggableInputHandler;
     private CardRenderComponent cardRenderComponent;
     private UserStoryGameplayComponent userStoryGameplayComponent;
+    private UserStoryInteractionComponent userStoryInteractionComponent;
     public UserStoryInputHandler(Transform transform, CardRenderComponent cardRenderComponent,
-        UserStoryGameplayComponent userStoryGameplayComponent)
+        UserStoryGameplayComponent userStoryGameplayComponent, UserStoryInteractionComponent userStoryInteractionComponent)
     {
         this.transform = transform;
         this.cardRenderComponent = cardRenderComponent;
         draggableInputHandler = new DraggableInputHandler();
         this.userStoryGameplayComponent = userStoryGameplayComponent;
+        this.userStoryInteractionComponent = userStoryInteractionComponent;
 
     }
 
@@ -46,10 +48,6 @@ public class UserStoryInputHandler
         {
             transform.position = draggableInputHandler.getInitialDragPosition();
         }
-        
-        /*
-         TODO: Control the allowed dragging areas using UserStory state & constrains from columns
-                then call the appropriate event trigger for ex. if user story is dropped in backlog
-        */
+        // userStoryInteractionComponent.resetDragging();
     }
 }

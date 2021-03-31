@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using TMPro;
+using System.Security.Cryptography;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+
+
 
 public class ColumnGameplayComponent
 {
@@ -14,6 +13,8 @@ public class ColumnGameplayComponent
     public const string DONE_TAG = "Done";
 
     private string columnTag; //The type of column
+    private LinkedList<StoryNode> userStoriesList; //Key is story id
+
     private ColumnRenderComponent columnRenderComponent;
 
     public ColumnGameplayComponent(string tag, ColumnRenderComponent columnRenderComponent)
@@ -31,6 +32,7 @@ public class ColumnGameplayComponent
         }
 
         this.columnRenderComponent = columnRenderComponent;
+        userStoriesList = new LinkedList<StoryNode>();
     }
 
     public string getColumnTag()
@@ -40,13 +42,17 @@ public class ColumnGameplayComponent
 
     public void add(UserStoryGameplayComponent userStory, Transform userStoryTransform)
     {
-        Debug.Log("adding user story to column");
-        
+        // userStoriesList.AddLast(new StoryNode(userStory.id, userStory, userStoryTransform));
+        columnRenderComponent.positionNewStory(userStoryTransform, userStoriesList.Count);
         columnRenderComponent.paintToDefault();
     }
-    
-    
-    
-    
-    
+
+    public void delete(int deletedId)
+    {
+     
+        // columnRenderComponent.shiftStoriesUp(deletedId, userStoriesList);
+        // userStoriesList.Remove(new StoryNode(deletedId));
+    }
+
+
 }

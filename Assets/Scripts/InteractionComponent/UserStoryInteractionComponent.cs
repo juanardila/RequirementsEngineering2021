@@ -1,4 +1,6 @@
-﻿public class UserStoryInteractionComponent
+﻿using UnityEngine;
+
+public class UserStoryInteractionComponent
 {
     private string draggedIntoColumn;
     public UserStoryInteractionComponent()
@@ -8,16 +10,23 @@
 
     public void beingDraggedOver(string column)
     {
+        Debug.Log(column);
         draggedIntoColumn = column;
     }
 
     
-    public void resetDraggin(string column)
+    public void resetDragging()
     {
-        if (column == draggedIntoColumn)
+        draggedIntoColumn = null;
+    }
+    
+    public void resetDragging(string currentColumnTag) 
+    {
+        if (currentColumnTag == draggedIntoColumn)
         {
-            draggedIntoColumn = null;
+            draggedIntoColumn = null;         
         }
+            
     }
     
     public string draggedToColumn()

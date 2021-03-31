@@ -16,9 +16,10 @@ public class UserStory : MonoBehaviour
     {
         Assert.AreEqual(tag, TAG);
         _userStoryInteractionComponent = new UserStoryInteractionComponent();
-        _userStoryGameplayComponent = new UserStoryGameplayComponent(_userStoryInteractionComponent);
+        _userStoryGameplayComponent = new UserStoryGameplayComponent(_userStoryInteractionComponent, GetComponent<Transform>());
         _renderComponent = new CardRenderComponent(GetComponent<SpriteRenderer>());
-        _inputHandler = new UserStoryInputHandler(GetComponent<Transform>(), _renderComponent, _userStoryGameplayComponent);
+        _inputHandler = new UserStoryInputHandler(GetComponent<Transform>(),
+            _renderComponent, _userStoryGameplayComponent, _userStoryInteractionComponent);
     }
 
     private void OnMouseDown()

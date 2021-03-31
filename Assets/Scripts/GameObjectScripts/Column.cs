@@ -8,7 +8,8 @@ public class Column : MonoBehaviour
 
     private void Start()
     {
-        _columnRenderComponent = new ColumnRenderComponent(GetComponent<SpriteRenderer>());
+        _columnRenderComponent = new ColumnRenderComponent(GetComponent<SpriteRenderer>(),
+            GetComponent<Transform>().position, GetComponent<BoxCollider2D>());
         _columnGameplayComponent = new ColumnGameplayComponent(tag, _columnRenderComponent);
         _columnCollisionComponent = new CollumnCollisionComponent(_columnRenderComponent, _columnGameplayComponent);
 
