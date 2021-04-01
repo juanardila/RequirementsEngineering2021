@@ -10,7 +10,6 @@ public class UserStoryInteractionComponent
 
     public void beingDraggedOver(string column)
     {
-        Debug.Log(column);
         draggedIntoColumn = column;
     }
 

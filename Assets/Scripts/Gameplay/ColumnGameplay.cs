@@ -42,16 +42,15 @@ public class ColumnGameplayComponent
 
     public void add(UserStoryGameplayComponent userStory, Transform userStoryTransform)
     {
-        // userStoriesList.AddLast(new StoryNode(userStory.id, userStory, userStoryTransform));
+        userStoriesList.AddLast(new StoryNode(userStory.id, userStory, userStoryTransform));
         columnRenderComponent.positionNewStory(userStoryTransform, userStoriesList.Count);
         columnRenderComponent.paintToDefault();
     }
 
     public void delete(int deletedId)
     {
-     
-        // columnRenderComponent.shiftStoriesUp(deletedId, userStoriesList);
-        // userStoriesList.Remove(new StoryNode(deletedId));
+        columnRenderComponent.shiftStoriesUp(deletedId, userStoriesList);
+        userStoriesList.Remove(new StoryNode(deletedId));
     }
 
 
