@@ -1,0 +1,43 @@
+{
+    "user_stories":[
+        {
+            "id":1,
+            "title":"",
+            "text":"",
+            "points":1
+        },
+        {
+            "id":2,
+            "title":"",
+            "text":"",
+            "points":1
+        }        
+    ],
+    "cards": {
+        "event":[
+            {
+                "title":"",
+                "description":"",
+                "event_code":"",
+                "face":"good - bad - neutral"
+            }
+        ],
+        "solution":[
+            {
+                "title":"",
+                "description":""
+
+            }
+        ],
+        "problem":[
+            {
+                "title":"",
+                "description":""
+            }
+        ]
+    },
+    "event_codes":{
+        "1":"Skips turn all team",
+        "2":"...."
+    }
+}
