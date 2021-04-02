@@ -2,42 +2,318 @@
     "user_stories":[
         {
             "id":1,
-            "title":"",
-            "text":"",
-            "points":1
+            "text":"Users can exchange emails securely with predefined recipients.",
+            "points":24
         },
         {
             "id":2,
-            "title":"",
-            "text":"",
-            "points":1
-        }        
+            "text":"Users can send large files securely.",
+            "points":21
+        },
+        {
+            "id":3,
+            "text":"Users can set time limits on emails for reading.",
+            "points":27
+        },
+        {
+            "id":4,
+            "text":"Users can send emails securely to unspecified recipients.",
+            "points":30
+        },      
+        {
+            "id":5,
+            "text":"Administrators of organizations can monitor emails.",
+            "points":16
+        }, 
+        {
+            "id":6,
+            "text":"Each organization can set security policies and define recipients groups.",
+            "points":24
+        }, 
+        {
+            "id":7,
+            "text":"Users can manage their emails effectively.",
+            "points":43
+        },      
+        {
+            "id":8,
+            "text":"Users and administrators can backup emails securely.",
+            "points":23
+        },  
+        {
+            "id":9,
+            "text":"Users and administrators can delete emails completely.",
+            "points":36
+        },  
+        {
+            "id":10,
+            "text":"Users can access emails from mobile.",
+            "points":68
+        },  
+        {
+            "id":11,
+            "text":"Users can send short messages securely to each other.",
+            "points":28
+        },  
+        {
+            "id":12,
+            "text":"Users don’t want to receive spam-letters.",
+            "points":24
+        }
     ],
     "cards": {
         "event":[
             {
-                "title":"",
-                "description":"",
-                "event_code":"",
-                "face":"good - bad - neutral"
+                "id":13,
+                "title":"GOOD RECRUIT",
+                "description":"New recruit is really good. You may roll 2 dice now and add these to the last roll.",
+                "event_code":1,
+                "face":1
+            }, 
+            {
+                "id":14,
+                "title":"HOME OFFICE",
+                "description":"You have worked well at home. Add 2 points to the last roll.",
+                "event_code":2,
+                "face":1
+            },     
+            {
+                "id":15,
+                "title":"BROWN BAG MEETING",
+                "description":"Discussion during lunch time led to a splendid idea. Work on the current card is instantly resolved.",
+                "event_code":3,
+                "face":1
+            },
+            {
+                "id":16,
+                "title":"GURU",
+                "description":"A guru visited your office. You may immediately remove one problem card from the current story.",
+                "event_code":4,
+                "face":1
+            },
+            {
+                "id":17,
+                "title":"DOING WELL",
+                "description":"Things are going incredibly well. Add 4 to the last roll.",
+                "event_code":5,
+                "face":1
+            }, 
+            {
+                "id":18,
+                "title":"VISIBLE EFFORT",
+                "description":"The boss acknowledges your effort. You may add 3 points to the previous result.",
+                "event_code":6,
+                "face":1
+            },
+            {
+                "id":19,
+                "title":"FAIRY",
+                "description":"A fairy helped you. A card in progress is instantly finished.",
+                "event_code":3,
+                "face":1
+            }, 
+            {
+                "id":20,
+                "title":"SICK AT HOME",
+                "description":"You are sick at home. Skip your next turn.",
+                "event_code":7,
+                "face":3
+            },    
+            {
+                "id":21,
+                "title":"HEALTH PROBLEM",
+                "description":"You have caught a cold. Skip your next turn.",
+                "event_code":7,
+                "face":3
+            }, 
+            {
+                "id":22,
+                "title":"HARD DRIVE CRASHED",
+                "description":"Hard drive crashed. Remove all progress from a card in progress.",
+                "event_code":8,
+                "face":3
+            }, 
+            {
+                "id":23,
+                "title":"EMERGENCY CALL",
+                "description":"An emergency call informs about an incident in the office. Everyone skips next turn",
+                "event_code":9,
+                "face":3
+            }, 
+            {
+                "id":23,
+                "title":"BUSINESS TRIP",
+                "description":"You are sent on a business trip. Skip next turn.",
+                "event_code":7,
+                "face":3
+            },
+            {
+                "id":24,
+                "title":"REQUIREMENTS CHANGE",
+                "description":"PO decided to make changes to the project. So this story will take 4 hours more.",
+                "event_code":10,
+                "face":3
+            },
+            {
+                "id":25,
+                "title":"EXTRA COST",
+                "description":"Your work costs more than planned. Add 6 hours to the story estimation.",
+                "event_code":11,
+                "face":3
+            },
+            {
+                "id":26,
+                "title":"BIRTHDAY",
+                "description":"It is your birthday today. Subtract 1 point from everybody's dice roll today.",
+                "event_code":12,
+                "face":2
+            }, 
+            {
+                "id":27,
+                "title":"OVERTIME",
+                "description":"You have worked overtime. Draw another card and follow its instruction.",
+                "event_code":13,
+                "face":2
             }
         ],
         "solution":[
             {
-                "title":"",
-                "description":""
-
+                "id":28,
+                "title":"GET SOME REST",
+                "description":"Get some rest to refresh your mind."
+            },
+            {
+                "id":29,
+                "title":"CONSULTING",
+                "description":"Involve a skilled team member from other team to consult you."
+            },
+            {
+                "id":30,
+                "title":"EXTRA MEMBER",
+                "description":"Add another member to the team. Throw dice once at any moment you want."
+            },  
+            {
+                "id":31,
+                "title":"COMMUNICATION",
+                "description":"Enhance communication."
+            },
+            {
+                "id":32,
+                "title":"SPECIALIST",
+                "description":"Engage a specialist."
+            }, 
+            {
+                "id":33,
+                "title":"AUTOMATED TESTING",
+                "description":"Introduce automated testing."
+            },
+            {
+                "id":34,
+                "title":"TL-SUPPORT",
+                "description":"Your team lead is ready to take a part of the work."
+            }, 
+            {
+                "id":35,
+                "title":"SHARE GOALS",
+                "description":"Get the team together and share the key project goals."
+            },
+            {
+                "id":36,
+                "title":"DEEP INSIGHT",
+                "description":"Apply your deep domain knowledge."
+            },
+            {
+                "id":37,
+                "title":"LESSONS LEARNT",
+                "description":"Apply experience destilled from former retrospectives."
+            },
+            {
+                "id":38,
+                "title":"COLLABORATION",
+                "description":"Get the team together with PO and exchange information."
+            },
+            {
+                "id":39,
+                "title":"PAIR PROGRAMMING",
+                "description":"Apply pair programming."
+            },  
+            {
+                "id":40,
+                "title":"ENHANCE SKILLS",
+                "description":"Get training for raising the level of your skill."
             }
         ],
         "problem":[
             {
-                "title":"",
-                "description":""
+                "id":41,
+                "title":"TECHNICAL OBSTACLE",
+                "description":"Your work is blocked by a technical obstacle."
+            },
+            {
+                "id":42,
+                "title":"BAD QUALITY",
+                "description":"You cannot finish the story because the quality is inadequate."
+            },
+            {
+                "id":43,
+                "title":"UNCLEAR SPEC",
+                "description":"The specification is not clear enough for you."
+            },
+            {
+                "id":44,
+                "title":"UNSATISFIED USERS",
+                "description":"You feel that users are not satisfied."
+            },
+            {
+                "id":45,
+                "title":"DATA IS MISSING",
+                "description":"You can't work with the story, as you don't have important data from PO."
+            },
+            {
+                "id":46,
+                "title":"BAD COMMUNICATION",
+                "description":"You cannot communicate well with other team members. They just don't get you."
+            },    
+            {
+                "id":47,
+                "title":"POOR SKILLS",
+                "description":"You are not skilled enough to finish the work."
+            },  
+            {
+                "id":48,
+                "title":"UNSTABLE SYSTEM",
+                "description":"System is very unstable. You have to test with major difficulties"
+            }, 
+            {
+                "id":49,
+                "title":"BAD MOOD",
+                "description":"Today you are upset. So you are too lazy to work."
+            },
+            {
+                "id":50,
+                "title":"INTEGRATION ISSUES",
+                "description":"Your colleague provided you with the component, which is different from what you expected. Your work is blocked."
             }
         ]
     },
     "event_codes":{
-        "1":"Skips turn all team",
-        "2":"...."
+        "1":"roll again 2 dices",
+        "2":"add 2 points to the last roll",
+        "3":"this card is resolved",
+        "4":"remove one problem from this card",
+        "5:":"add 4 to the last roll",
+        "6":"add 3 to the last roll",
+        "7":"this player skips next turn",
+        "8":"remove progress from card in progress",
+        "9":"everyone skips next turn",
+        "10":"add 4 to the card estimation",
+        "11":"add 6 to the card estimation",
+        "12":"substract 1 from every one rolls this day",
+        "13":"draw another event card"
+    },
+    "event_faces":{
+        "1":"good",
+        "2":"neutral",
+        "3":"bad"
     }
 }
