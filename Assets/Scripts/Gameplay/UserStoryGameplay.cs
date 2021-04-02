@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 /**
@@ -30,6 +31,13 @@ public class UserStoryGameplayComponent
         Board.getInstance().getColumn(currentColumn).delete(this.id);
         currentColumn = userStoryInteractionComponent.draggedToColumn();
         Board.getInstance().getColumn(currentColumn).add(this, userStoryTransform);
+    }
+
+
+    public void moveToColumn(string column)
+    {
+        Board.getInstance().getColumn(column).delete(this.id);
+        Board.getInstance().getColumn(column).add(this, userStoryTransform);
     }
     
     public bool canBeMovedTo(string newColumn)

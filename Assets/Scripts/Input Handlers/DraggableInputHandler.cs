@@ -33,6 +33,7 @@ public class DraggableInputHandler
     public Vector3 getDelta()
     {
         Vector3 current = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 current = Camera.main.ScreenToViewportPoint(Input.mousePosition);
         Vector3 delta = current - prevMousePosition;
         prevMousePosition = current;
         delta.z = 0; //do not move in z
