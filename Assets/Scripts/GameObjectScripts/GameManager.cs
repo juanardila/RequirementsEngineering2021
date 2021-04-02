@@ -1,7 +1,15 @@
-﻿namespace GameObjectScripts
+﻿using System;
+using System.Runtime.CompilerServices;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
 {
-    public class GameManager
+    public GameObject userStoryPrefab;
+    private void Start()
     {
-        
+        GameObject userStoryGameObject =  Instantiate(userStoryPrefab);
+        UserStory userStory = userStoryGameObject.GetComponent<UserStory>();
+        userStory.initializeGameplay("1", "This works", "30");
+        Debug.Log("Initialized");
     }
 }

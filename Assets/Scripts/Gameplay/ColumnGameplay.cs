@@ -25,7 +25,7 @@ public class ColumnGameplayComponent
             case TODO_TAG:
             case ONPROGRESS_TAG:
             case DONE_TAG:
-                this.columnTag = tag;
+                columnTag = tag;
                 break;
             default:
                 throw new Exception("This tag does not exists");

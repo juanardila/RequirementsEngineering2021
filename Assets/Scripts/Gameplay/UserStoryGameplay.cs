@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 /**
  * This class handles everything related to the gameplay
@@ -13,16 +14,30 @@ public class UserStoryGameplayComponent
     public int points;
     public string text;
     private string currentColumn;
-
-    
+    private TextMeshProUGUI pointsMesh;
 
     public UserStoryGameplayComponent(UserStoryInteractionComponent userStoryInteractionComponent, Transform userStoryTransform,
         UserStoryNetworkingComponent userStoryNetworkingComponent)
     {
-        currentColumn = ColumnGameplayComponent.BACLOG_TAG;
+        this.currentColumn = ColumnGameplayComponent.BACLOG_TAG;
         this.userStoryInteractionComponent = userStoryInteractionComponent;
         this.userStoryTransform = userStoryTransform;
         this.userStoryNetworkingComponent = userStoryNetworkingComponent;
+
+    }
+    
+    public void initializeRunTimeAttributes(int id, string title, int points, TextMeshProUGUI pointsMesh)
+    {
+        this.id = id;
+        this.points = points;
+        this.text = text;
+        this.pointsMesh = pointsMesh;
+    }
+    
+    public void work(int pointsDiminished)
+    {
+        points -= pointsDiminished;
+        pointsMesh.text = points.ToString();
     }
 
     public void moveToColumn()

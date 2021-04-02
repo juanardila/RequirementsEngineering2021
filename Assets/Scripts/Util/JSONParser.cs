@@ -1,7 +1,7 @@
-﻿namespace Util
+﻿
+using SimpleJSON;
+
+public class JSONParser
 {
-    public class JSONParser
-    {
-        
-    }
+    JSON.Parse()
 }

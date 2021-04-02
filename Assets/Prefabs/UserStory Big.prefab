@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4672682086301054801}
   - component: {fileID: 4672682086301054800}
   m_Layer: 0
-  m_Name: UserStory 1
+  m_Name: UserStory Big
   m_TagString: UserStory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,6 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34738bd6083957f4bbec79ca89fc2643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: {fileID: 4672682087206993484}
+  title: {fileID: 4672682086874842427}
+  points: {fileID: 4672682087095598951}
 --- !u!50 &4672682086301054801
 Rigidbody2D:
   serializedVersion: 4
