@@ -10,6 +10,5 @@ public class GameManager : MonoBehaviour
         GameObject userStoryGameObject =  Instantiate(userStoryPrefab);
         UserStory userStory = userStoryGameObject.GetComponent<UserStory>();
         userStory.initializeGameplay("1", "This works", "30");
-        Debug.Log("Initialized");
     }
 }

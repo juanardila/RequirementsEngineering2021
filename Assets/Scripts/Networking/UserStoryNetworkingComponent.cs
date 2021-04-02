@@ -10,9 +10,9 @@ public class UserStoryNetworkingComponent : PhotonView
         this.photonView = photonView;
     }
 
-    public void sendMoveUserStory(int userStoryId, string column)
+    public void sendMoveUserStory(int userStoryId, string prevColumn, string newColumn)
     {
-        photonView.RPC("_moveUserStory", RpcTarget.Others, userStoryId, column);
+        photonView.RPC("_moveUserStory", RpcTarget.Others, userStoryId, prevColumn, newColumn);
         Debug.Log("Story Moved send");
     }
     

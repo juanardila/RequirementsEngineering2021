@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class StoryNode
 {
@@ -8,7 +9,9 @@ public class StoryNode
     
     public static bool operator==(StoryNode storyNode, StoryNode other)
     {
+
         return storyNode.id == other.id;
+        
     }
 
     public static bool operator !=(StoryNode storyNode, StoryNode other)
@@ -28,3 +31,17 @@ public class StoryNode
         this.id = id;
     }
 }
+
+class StoryList
+{
+    public static StoryNode find(LinkedList<StoryNode> list, int nodeId)
+    {
+        foreach (StoryNode node in list)
+        {
+            if (node.id == nodeId)
+                return node;
+        }
+        return null;
+    }
+}
+

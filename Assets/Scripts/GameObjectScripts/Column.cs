@@ -6,7 +6,7 @@ public class Column : MonoBehaviour
     private ColumnGameplayComponent _columnGameplayComponent;
     private CollumnCollisionComponent _columnCollisionComponent;
 
-    private void Start()
+    private void Awake()
     {
         _columnRenderComponent = new ColumnRenderComponent(GetComponent<SpriteRenderer>(),
             GetComponent<Transform>().position, GetComponent<BoxCollider2D>());

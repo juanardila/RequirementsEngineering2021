@@ -43,14 +43,15 @@ public class UserStory : MonoBehaviour
         this.title.text = title;
         this.points.text = points;
         _userStoryGameplayComponent.initializeRunTimeAttributes(1, title, 30, this.points);
-        Board.getInstance().getColumn(ColumnGameplayComponent.BACLOG_TAG).add(_userStoryGameplayComponent, GetComponent<Transform>());
+        Board.getInstance().getColumn(ColumnGameplayComponent.BACLOG_TAG)
+            .add(_userStoryGameplayComponent, GetComponent<Transform>());
     }
     
     //Networking Remote Proccedure Calls.... for user stories
     [PunRPC]
-    public void _moveUserStory(int userStoryId, string column)
+    public void _moveUserStory(int userStoryId,string prevColumn, string newColumn )
     {
-        UserStoryGameplayComponent.moveToColumn(userStoryId, column);
+        UserStoryGameplayComponent.moveToColumn(userStoryId, prevColumn, newColumn );
     }
     
     private void OnMouseDown()

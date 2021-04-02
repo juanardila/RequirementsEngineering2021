@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 /**
@@ -43,19 +44,21 @@ public class UserStoryGameplayComponent
     public void moveToColumn()
     {
         Board.getInstance().getColumn(currentColumn).delete(this.id);
+        userStoryNetworkingComponent.sendMoveUserStory(this.id, currentColumn, userStoryInteractionComponent.draggedToColumn());
         currentColumn = userStoryInteractionComponent.draggedToColumn();
-        userStoryNetworkingComponent.sendMoveUserStory(this.id, currentColumn);
         Board.getInstance().getColumn(currentColumn).add(this, userStoryTransform);
     }
 
 
-    public static void moveToColumn(int userStoryId, string column)
+    public static void moveToColumn(int userStoryId, string prevColumn, string newColumn )
     {
-        StoryNode storyNode = Board.getInstance().getColumn(column).getStories().Find(new StoryNode(userStoryId)).Value;
-        if (storyNode != null)
+        StoryNode storyNode = StoryList.find(Board.getInstance().getColumn(prevColumn).getStories(),
+            userStoryId);
+        if (storyNode.id != null)
         {
-            Board.getInstance().getColumn(column).delete(userStoryId);
-            Board.getInstance().getColumn(column).add(storyNode.userStoryGameplayComponent, storyNode.userStoryTransform);    
+            storyNode.userStoryGameplayComponent.currentColumn = newColumn;
+            Board.getInstance().getColumn(prevColumn).delete(userStoryId);
+            Board.getInstance().getColumn(newColumn).add(storyNode.userStoryGameplayComponent, storyNode.userStoryTransform);
         }
     }
     
