@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Photon.Pun;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 /**
  * This class handles everything related to the gameplay
@@ -11,6 +7,7 @@ public class UserStoryGameplayComponent
 {
     private UserStoryInteractionComponent userStoryInteractionComponent;
     private Transform userStoryTransform;
+    private UserStoryNetworkingComponent userStoryNetworkingComponent;
 
     public int id;
     public int points;
@@ -19,25 +16,32 @@ public class UserStoryGameplayComponent
 
     
 
-    public UserStoryGameplayComponent(UserStoryInteractionComponent userStoryInteractionComponent, Transform userStoryTransform)
+    public UserStoryGameplayComponent(UserStoryInteractionComponent userStoryInteractionComponent, Transform userStoryTransform,
+        UserStoryNetworkingComponent userStoryNetworkingComponent)
     {
         currentColumn = ColumnGameplayComponent.BACLOG_TAG;
         this.userStoryInteractionComponent = userStoryInteractionComponent;
         this.userStoryTransform = userStoryTransform;
+        this.userStoryNetworkingComponent = userStoryNetworkingComponent;
     }
 
     public void moveToColumn()
     {
         Board.getInstance().getColumn(currentColumn).delete(this.id);
         currentColumn = userStoryInteractionComponent.draggedToColumn();
+        userStoryNetworkingComponent.sendMoveUserStory(this.id, currentColumn);
         Board.getInstance().getColumn(currentColumn).add(this, userStoryTransform);
     }
 
 
-    public void moveToColumn(string column)
+    public static void moveToColumn(int userStoryId, string column)
     {
-        Board.getInstance().getColumn(column).delete(this.id);
-        Board.getInstance().getColumn(column).add(this, userStoryTransform);
+        StoryNode storyNode = Board.getInstance().getColumn(column).getStories().Find(new StoryNode(userStoryId)).Value;
+        if (storyNode != null)
+        {
+            Board.getInstance().getColumn(column).delete(userStoryId);
+            Board.getInstance().getColumn(column).add(storyNode.userStoryGameplayComponent, storyNode.userStoryTransform);    
+        }
     }
     
     public bool canBeMovedTo(string newColumn)

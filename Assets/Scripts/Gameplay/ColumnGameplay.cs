@@ -53,5 +53,9 @@ public class ColumnGameplayComponent
         userStoriesList.Remove(new StoryNode(deletedId));
     }
 
+    public LinkedList<StoryNode> getStories()
+    {
+        return userStoriesList;
+    }
 
 }
