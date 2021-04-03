@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Lumin;
 
@@ -9,14 +10,14 @@ public class UserStoryInputHandler
 {
     private Transform transform;
     private DraggableInputHandler draggableInputHandler;
-    private CardRenderComponent cardRenderComponent;
+    private UserStoryRendererComponent userStoryRenderComponent;
     private UserStoryGameplayComponent userStoryGameplayComponent;
     private UserStoryInteractionComponent userStoryInteractionComponent;
-    public UserStoryInputHandler(Transform transform, CardRenderComponent cardRenderComponent,
+    public UserStoryInputHandler(Transform transform, UserStoryRendererComponent userStoryRenderComponent,
         UserStoryGameplayComponent userStoryGameplayComponent, UserStoryInteractionComponent userStoryInteractionComponent)
     {
         this.transform = transform;
-        this.cardRenderComponent = cardRenderComponent;
+        this.userStoryRenderComponent = userStoryRenderComponent;
         draggableInputHandler = new DraggableInputHandler();
         this.userStoryGameplayComponent = userStoryGameplayComponent;
         this.userStoryInteractionComponent = userStoryInteractionComponent;
@@ -28,7 +29,12 @@ public class UserStoryInputHandler
         if (Sprint.getInstance().getGameplayComponent().getPhase() == SprintGameplay.Phase.PlanningAndCommitment)
         {
             draggableInputHandler.onClick(transform.localPosition); //Let base class control dragging states
-            cardRenderComponent.raiseCard();    
+            userStoryRenderComponent.raiseCard();    
+        } else if (Sprint.getInstance().getGameplayComponent().getPhase() == SprintGameplay.Phase.WorkWithInIteration &&
+                   userStoryGameplayComponent.storyCanBeWorkedOn() && 
+                   Iteration.getInstance().getGameplaycomponent().getCurrentPlayer().Equals(PhotonNetwork.LocalPlayer) )
+        {
+            userStoryGameplayComponent.workInThisStory();
         }
     }
 
@@ -46,7 +52,7 @@ public class UserStoryInputHandler
         if (Sprint.getInstance().getGameplayComponent().getPhase() == SprintGameplay.Phase.PlanningAndCommitment)
         {
             draggableInputHandler.onRelase();
-            cardRenderComponent.putDownCard();
+            userStoryRenderComponent.putDownCard();
             if (userStoryGameplayComponent.wasDraggedIntoAColumn())
             {
                 userStoryGameplayComponent.moveToColumn();

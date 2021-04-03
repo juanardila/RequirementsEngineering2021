@@ -12,22 +12,28 @@ using UnityEngine.Assertions;
 public class UserStory : MonoBehaviour
 {
     private UserStoryInputHandler _inputHandler;
-    private CardRenderComponent _renderComponent;
+    private UserStoryRendererComponent _renderComponent;
     private UserStoryGameplayComponent _userStoryGameplayComponent;
     private UserStoryInteractionComponent _userStoryInteractionComponent;
     private UserStoryNetworkingComponent _userStoryNetworkingComponent;
+
     public const string TAG = "UserStory";
     public TextMeshProUGUI id;
     public TextMeshProUGUI title;
     public TextMeshProUGUI points;
+    public Sprite workInStorySprite;
+    public Sprite workingInStorySprite;
+    public Sprite workingDisabledSprite;
 
     private void OnEnable()
     {
         Assert.AreEqual(tag, TAG);
         _userStoryNetworkingComponent = new UserStoryNetworkingComponent();
         _userStoryInteractionComponent = new UserStoryInteractionComponent();
-        _userStoryGameplayComponent = new UserStoryGameplayComponent(_userStoryInteractionComponent, GetComponent<Transform>(), _userStoryNetworkingComponent);
-        _renderComponent = new CardRenderComponent(GetComponent<SpriteRenderer>());
+        _renderComponent = new UserStoryRendererComponent(GetComponent<SpriteRenderer>(), points,
+            workInStorySprite, workingInStorySprite, workingDisabledSprite);
+        _userStoryGameplayComponent = new UserStoryGameplayComponent(_userStoryInteractionComponent,
+            GetComponent<Transform>(), _userStoryNetworkingComponent, _renderComponent);
         _inputHandler = new UserStoryInputHandler(GetComponent<Transform>(),
             _renderComponent, _userStoryGameplayComponent, _userStoryInteractionComponent);
     }
@@ -59,7 +65,7 @@ public class UserStory : MonoBehaviour
     {
         _inputHandler.onRelase();        
     }
-
+    
     public UserStoryGameplayComponent getGameplayComponent()
     {
         return _userStoryGameplayComponent;

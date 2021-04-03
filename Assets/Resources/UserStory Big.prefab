@@ -127,6 +127,9 @@ MonoBehaviour:
   id: {fileID: 4672682087206993484}
   title: {fileID: 4672682086874842427}
   points: {fileID: 4672682087095598951}
+  workInStorySprite: {fileID: 21300000, guid: 92babb011c1ef4443ac793172c145fcd, type: 3}
+  workingInStorySprite: {fileID: 21300000, guid: 8a8870e793534fb4e9558a927abe04e4, type: 3}
+  workingDisabledSprite: {fileID: 21300000, guid: af4f7a16770b93547ab92d7a5df9f727, type: 3}
 --- !u!50 &4672682086301054801
 Rigidbody2D:
   serializedVersion: 4

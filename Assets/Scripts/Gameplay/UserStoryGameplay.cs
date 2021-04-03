@@ -10,6 +10,7 @@ public class UserStoryGameplayComponent
     private UserStoryInteractionComponent userStoryInteractionComponent;
     private Transform userStoryTransform;
     private UserStoryNetworkingComponent userStoryNetworkingComponent;
+    private UserStoryRendererComponent userStoryRendererComponent;
     
     public int id;
     public int points;
@@ -17,15 +18,17 @@ public class UserStoryGameplayComponent
     
     private string currentColumn;
     private TextMeshProUGUI pointsMesh;
+    private bool canBeWorkedOn;
 
     public UserStoryGameplayComponent(UserStoryInteractionComponent userStoryInteractionComponent, Transform userStoryTransform,
-        UserStoryNetworkingComponent userStoryNetworkingComponent)
+        UserStoryNetworkingComponent userStoryNetworkingComponent, UserStoryRendererComponent userStoryRendererComponent)
     {
         this.currentColumn = ColumnGameplayComponent.BACLOG_TAG;
         this.userStoryInteractionComponent = userStoryInteractionComponent;
         this.userStoryTransform = userStoryTransform;
         this.userStoryNetworkingComponent = userStoryNetworkingComponent;
-
+        this.userStoryRendererComponent = userStoryRendererComponent;
+        this.canBeWorkedOn = false;
     }
     
     public void initializeRunTimeAttributes(int id, string title, int points, TextMeshProUGUI pointsMesh)
@@ -87,10 +90,32 @@ public class UserStoryGameplayComponent
         return  newColumn != null &&
                 newColumn != currentColumn;
     }
-
-    public string getColumn()
+    
+    public void setAvailableToWork()
     {
-        return currentColumn;
+        this.canBeWorkedOn = true;
+        userStoryRendererComponent.showWorkInStory();
+    }
+    public void setUnAvailableToWork()
+    {
+        this.canBeWorkedOn = false;
     }
 
+    public bool storyCanBeWorkedOn()
+    {
+        return this.canBeWorkedOn;
+    }
+    
+    private void setPoints(int points)
+    {
+        this.points = points;
+        userStoryRendererComponent.setPointsText(points);
+    }
+
+    public void workInThisStory()
+    {
+        PlayerGameplay.workedOnStory = this;
+        userStoryRendererComponent.showWorkingInStory();
+        //Allow dice roll
+    }
 }

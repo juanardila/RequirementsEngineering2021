@@ -22,15 +22,17 @@ public class IterationGameplay
         day = 1;
         currentPlayer = 0;
         iterationRendererComponent.showPlayerIndicator(currentPlayer);
+        PlayerGameplay.startDailyWork();
     }
     
     public void nextPlayerWorks()
     {
         iterationRendererComponent.hidePlayerIndicator(currentPlayer);
-        if (currentPlayer < playersList.Length - 1)
+        if (currentPlayer < playersList.Length)
         {
             currentPlayer++;
             iterationRendererComponent.showPlayerIndicator(currentPlayer);
+            PlayerGameplay.startDailyWork();
         }
         else
         {
@@ -42,6 +44,15 @@ public class IterationGameplay
     {
         return currentPlayer;
     }
+
+    public Player getCurrentPlayer()
+    {
+        return playersList[currentPlayer];
+    }
+
+    
+    
+    
 
 
 }
