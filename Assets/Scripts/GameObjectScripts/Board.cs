@@ -10,8 +10,7 @@ public class Board : MonoBehaviour
     public GameObject toDo;
     public GameObject onProgress;
     public GameObject done;
-
-
+    
     private static Board _instance;
 
     public static Board getInstance()

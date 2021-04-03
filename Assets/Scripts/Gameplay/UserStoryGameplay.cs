@@ -10,10 +10,11 @@ public class UserStoryGameplayComponent
     private UserStoryInteractionComponent userStoryInteractionComponent;
     private Transform userStoryTransform;
     private UserStoryNetworkingComponent userStoryNetworkingComponent;
-
+    
     public int id;
     public int points;
     public string text;
+    
     private string currentColumn;
     private TextMeshProUGUI pointsMesh;
 

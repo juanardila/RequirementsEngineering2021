@@ -37,12 +37,12 @@ public class UserStory : MonoBehaviour
      * Helper function that fills the values of the user story after
      * initialization with Instantiate
      */
-    public void initializeGameplay(string id, string title, string points)
+    public void initializeGameplay(int id, string title, int points)
     {
-        this.id.text = id;
+        this.id.text = id.ToString();
         this.title.text = title;
-        this.points.text = points;
-        _userStoryGameplayComponent.initializeRunTimeAttributes(1, title, 30, this.points);
+        this.points.text = points.ToString();
+        _userStoryGameplayComponent.initializeRunTimeAttributes(id, title, points, this.points);
         Board.getInstance().getColumn(ColumnGameplayComponent.BACLOG_TAG)
             .add(_userStoryGameplayComponent, GetComponent<Transform>());
     }
