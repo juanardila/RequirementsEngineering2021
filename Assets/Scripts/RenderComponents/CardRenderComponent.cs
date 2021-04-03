@@ -8,6 +8,10 @@ using UnityEngine;
 public class CardRenderComponent
 {
     private SpriteRenderer spriteRenderer;
+    private Sprite userStorySprite;
+    private Sprite workInSprite;
+    private Sprite workingInSprite;
+    
     private const int baseLayer = 2;
     private const int raisedLayer = 3;
     
@@ -26,4 +30,6 @@ public class CardRenderComponent
     {
         spriteRenderer.sortingOrder = baseLayer;
     }
+    
+    
 }

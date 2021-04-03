@@ -26,6 +26,11 @@ public class SprintGameplay
     {
         return phase;
     }
+    
+    public int getSprintNumber()
+    {
+        return sprintNumber;
+    }
 
     public void advanceToWorkWithInIteration()
     {
@@ -33,8 +38,10 @@ public class SprintGameplay
         sprintRenderComponent.hidePlanningAndCommitementSprite();
         Board.getInstance().toDo.GetComponent<Column>()
             .getGameplayComponent().moveCardsToColumn(ColumnGameplayComponent.ONPROGRESS_TAG);
+        Iteration.getInstance().getGameplaycomponent().startIteration();
     }
     
+
     
     
     

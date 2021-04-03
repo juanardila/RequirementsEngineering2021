@@ -1820,6 +1820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746471289}
   - component: {fileID: 746471290}
+  - component: {fileID: 746471291}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -1859,6 +1860,30 @@ MonoBehaviour:
   sprintNumber: {fileID: 26609812}
   planningAndCommitmentSprite: {fileID: 1313603404}
   advanteToWorkWithInIteration: {fileID: 1303513052}
+--- !u!114 &746471291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746471288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb5cc055d07413f8688cee510f626d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1Indicator: {fileID: 1080512715}
+  player2Indicator: {fileID: 1071204304}
+  player3Indicator: {fileID: 1332092230}
+  player4Indicator: {fileID: 867275259}
+  player5Indicator: {fileID: 1684686020}
+  player6Indicator: {fileID: 621511560}
+  player1Name: {fileID: 2000345302}
+  player2Name: {fileID: 614305953}
+  player3Name: {fileID: 465257745}
+  player4Name: {fileID: 1710036078}
+  player5Name: {fileID: 8186665}
+  player6Name: {fileID: 195651298}
 --- !u!1 &778312061
 GameObject:
   m_ObjectHideFlags: 0
