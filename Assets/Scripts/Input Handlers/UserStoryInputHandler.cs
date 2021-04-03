@@ -22,32 +22,41 @@ public class UserStoryInputHandler
         this.userStoryInteractionComponent = userStoryInteractionComponent;
 
     }
-
+    //TODO: Refactor if checking state of sprint 
     public void onClick()
     {
-        draggableInputHandler.onClick(transform.localPosition); //Let base class control dragging states
-        cardRenderComponent.raiseCard();
-        
+        if (Sprint.getInstance().getGameplayComponent().getPhase() == SprintGameplay.Phase.PlanningAndCommitment)
+        {
+            draggableInputHandler.onClick(transform.localPosition); //Let base class control dragging states
+            cardRenderComponent.raiseCard();    
+        }
     }
 
     public void onDrag()
     {
-        draggableInputHandler.onDrag();
-        transform.localPosition += draggableInputHandler.getDelta();
+        if (Sprint.getInstance().getGameplayComponent().getPhase() == SprintGameplay.Phase.PlanningAndCommitment)
+        {
+            draggableInputHandler.onDrag();
+            transform.localPosition += draggableInputHandler.getDelta();
+        }
     }
 
     public void onRelase()
     {
-        draggableInputHandler.onRelase();
-        cardRenderComponent.putDownCard();
-        if (userStoryGameplayComponent.wasDraggedIntoAColumn())
+        if (Sprint.getInstance().getGameplayComponent().getPhase() == SprintGameplay.Phase.PlanningAndCommitment)
         {
-            userStoryGameplayComponent.moveToColumn();
+            draggableInputHandler.onRelase();
+            cardRenderComponent.putDownCard();
+            if (userStoryGameplayComponent.wasDraggedIntoAColumn())
+            {
+                userStoryGameplayComponent.moveToColumn();
+            }
+            else
+            {
+                transform.position = draggableInputHandler.getInitialDragPosition();
+            }
         }
-        else
-        {
-            transform.position = draggableInputHandler.getInitialDragPosition();
-        }
+
         // userStoryInteractionComponent.resetDragging();
     }
 }

@@ -1,0 +1,43 @@
+﻿
+using UnityEngine;
+
+public class SprintGameplay
+{
+    public enum Phase
+    {
+        PlanningAndCommitment,
+        WorkWithInIteration,
+        SpringReviewAndRetrospective
+    }
+    
+    private int sprintNumber;
+    private Phase phase;
+    private SprintRenderComponent sprintRenderComponent;
+    
+    public SprintGameplay(SprintRenderComponent sprintRenderComponent)
+    {
+        this.sprintNumber = 1;
+        this.phase = Phase.PlanningAndCommitment;
+        this.sprintRenderComponent = sprintRenderComponent;
+        sprintRenderComponent.showPlanningAndCommitementSprite();
+    }
+
+    public Phase getPhase()
+    {
+        return phase;
+    }
+
+    public void advanceToWorkWithInIteration()
+    {
+        phase = Phase.WorkWithInIteration;
+        sprintRenderComponent.hidePlanningAndCommitementSprite();
+        Board.getInstance().toDo.GetComponent<Column>()
+            .getGameplayComponent().moveCardsToColumn(ColumnGameplayComponent.ONPROGRESS_TAG);
+    }
+    
+    
+    
+    
+    
+    
+}

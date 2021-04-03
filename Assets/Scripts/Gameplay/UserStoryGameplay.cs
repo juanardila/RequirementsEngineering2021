@@ -50,7 +50,9 @@ public class UserStoryGameplayComponent
         Board.getInstance().getColumn(currentColumn).add(this, userStoryTransform);
     }
 
-
+    /**
+     * Implementetion specific for networkning porpuses
+     */
     public static void moveToColumn(int userStoryId, string prevColumn, string newColumn )
     {
         StoryNode storyNode = StoryList.find(Board.getInstance().getColumn(prevColumn).getStories(),

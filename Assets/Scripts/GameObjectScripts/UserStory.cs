@@ -1,12 +1,10 @@
-﻿using System;
-using System.Diagnostics;
+﻿using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Assertions;
-using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
+
 
 /**
  * this class represents the user story game entity
@@ -26,7 +24,7 @@ public class UserStory : MonoBehaviour
     private void OnEnable()
     {
         Assert.AreEqual(tag, TAG);
-        _userStoryNetworkingComponent = new UserStoryNetworkingComponent(GetComponent<PhotonView>());
+        _userStoryNetworkingComponent = new UserStoryNetworkingComponent();
         _userStoryInteractionComponent = new UserStoryInteractionComponent();
         _userStoryGameplayComponent = new UserStoryGameplayComponent(_userStoryInteractionComponent, GetComponent<Transform>(), _userStoryNetworkingComponent);
         _renderComponent = new CardRenderComponent(GetComponent<SpriteRenderer>());
@@ -45,13 +43,6 @@ public class UserStory : MonoBehaviour
         _userStoryGameplayComponent.initializeRunTimeAttributes(id, title, points, this.points);
         Board.getInstance().getColumn(ColumnGameplayComponent.BACLOG_TAG)
             .add(_userStoryGameplayComponent, GetComponent<Transform>());
-    }
-    
-    //Networking Remote Proccedure Calls.... for user stories
-    [PunRPC]
-    public void _moveUserStory(int userStoryId,string prevColumn, string newColumn )
-    {
-        UserStoryGameplayComponent.moveToColumn(userStoryId, prevColumn, newColumn );
     }
     
     private void OnMouseDown()
@@ -77,5 +68,5 @@ public class UserStory : MonoBehaviour
     {
         return _userStoryInteractionComponent;
     }
-
+    
 }

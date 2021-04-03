@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4672682086301054799}
   - component: {fileID: 4672682086301054798}
   - component: {fileID: 4672682086301054801}
-  - component: {fileID: 4672682086301054800}
   m_Layer: 0
   m_Name: UserStory Big
   m_TagString: UserStory
@@ -149,28 +148,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4672682086301054800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4672682086301054803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 1
-  OwnershipTransfer: 2
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &4672682086468899780
 GameObject:
   m_ObjectHideFlags: 0

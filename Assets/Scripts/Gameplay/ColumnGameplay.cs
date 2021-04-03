@@ -40,6 +40,30 @@ public class ColumnGameplayComponent
         return columnTag;
     }
 
+    public void moveCardsToColumn(string tag)
+    {
+        switch (tag)
+        {
+            case ONPROGRESS_TAG:
+                if(columnTag != ONPROGRESS_TAG)
+                    moveCardsToColumn(Board.getInstance().onProgress.GetComponent<Column>().getGameplayComponent());
+                break;
+        }
+        
+    }
+
+    private void moveCardsToColumn(ColumnGameplayComponent newColumn)
+    {
+        newColumn.userStoriesList.Clear();
+        newColumn.userStoriesList = this.userStoriesList;
+        userStoriesList = new LinkedList<StoryNode>();
+        int storyIndex = 1; //for simulating insertion one by one
+        foreach (StoryNode storyNode in newColumn.userStoriesList )
+        {
+            newColumn.columnRenderComponent.positionNewStory(storyNode.userStoryTransform, storyIndex++);
+        }
+    }
+
     public void add(UserStoryGameplayComponent userStory, Transform userStoryTransform)
     {
         userStoriesList.AddLast(new StoryNode(userStory.id, userStory, userStoryTransform));
