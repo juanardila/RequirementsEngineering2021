@@ -1,5 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine;
+
 public class IterationGameplay
 {
     private IterationRendererComponent iterationRendererComponent;
@@ -55,7 +57,24 @@ public class IterationGameplay
         iterationRendererComponent.showRollButton();
     }
 
-    
+    public void rollDices()
+    {
+        Debug.Log("!");
+        if (PlayerGameplay.workedOnStory != null )
+        {
+            int firstRollValue = Dice.getInstance().
+                getFirstDiceGameplayComponent().rollDice();
+            int secondRollValue = Dice.getInstance().
+                getSecondDiceGameplayComponent().rollDice();
+            iterationRendererComponent.showRollValue(firstRollValue + secondRollValue);
+            //Draw a card and apply changes
+            int cardDrawn = Board.getInstance().chanceDeck.drawCard();
+            //Broadcarst Dice and Card Information
+            iterationNetworkComponent.sendTurnInformation(rollValue, cardDrawn, PlayerGameplay.workedOnStory.id);
+        }
+        
+        
+    }
     
     
 

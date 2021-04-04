@@ -1,13 +1,19 @@
 ﻿using System;
+using UnityEditor.XR.LegacyInputHelpers;
 
 public class DiceGameplayComponent
 {
     private DiceRenderComponent diceRenderComponent;
     private const int diceFaces = 6;
     private Random randomGenerator;
+    private static Random seedGenerator = new Random();
+    private static int getSeed()
+    {
+        return seedGenerator.Next();
+    }
     public DiceGameplayComponent(DiceRenderComponent diceRendererComponent)
     {
-        randomGenerator = new Random();
+        randomGenerator = new Random(getSeed());
         this.diceRenderComponent = diceRendererComponent;
     }
 

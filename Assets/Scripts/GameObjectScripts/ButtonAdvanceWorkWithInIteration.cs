@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AdvanceWorkWithInIteration : MonoBehaviour
+public class ButtonAdvanceWorkWithInIteration : MonoBehaviour
 {
     private SprintInputHandler _sprintInputHandler; 
     private void Start()

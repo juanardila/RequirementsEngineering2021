@@ -52,6 +52,11 @@ public class IterationRendererComponent
     {
         rollButton.enabled = true;
     }
+
+    public void showRollValue(int rollValue)
+    {
+        this.rollValue.text = rollValue.ToString();
+    }
     
     
 }

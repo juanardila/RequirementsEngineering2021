@@ -45,12 +45,12 @@ public class Dice : MonoBehaviour
 
     public DiceGameplayComponent getFirstDiceGameplayComponent()
     {
-        return firstDiceGameplayComponent;
+        return this.firstDiceGameplayComponent;
     }
     
     public DiceGameplayComponent getSecondDiceGameplayComponent()
     {
-        return firstDiceGameplayComponent;
+        return secondDiceGameplayComponent;
     }
     
     public DiceGameplayComponent getFirstDiceRenderComponent()

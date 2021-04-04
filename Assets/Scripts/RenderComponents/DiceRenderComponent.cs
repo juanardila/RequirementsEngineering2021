@@ -15,6 +15,6 @@ public class DiceRenderComponent
 
     public void showRoll(int rollValue )
     {
-        diceSpriteRenderer.sprite = rollSprites[rollValue];
+        diceSpriteRenderer.sprite = rollSprites[rollValue - 1];
     }
 }
