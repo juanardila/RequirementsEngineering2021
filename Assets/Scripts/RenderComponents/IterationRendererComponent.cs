@@ -6,12 +6,18 @@ public class IterationRendererComponent
     private TextMeshProUGUI[] playerNameMeshes;
     private SpriteRenderer[] playerIndicatorSprites;
 
+    private SpriteRenderer rollButton;
+    private TextMeshProUGUI rollValue;
+    
     public IterationRendererComponent(TextMeshProUGUI[] playerNameMeshes,
-        SpriteRenderer[] playerIndicatorSprites)
+        SpriteRenderer[] playerIndicatorSprites, SpriteRenderer rollButton,
+        TextMeshProUGUI rollValue)
     {
         this.playerNameMeshes = playerNameMeshes;
         this.playerIndicatorSprites = playerIndicatorSprites;
-        deactivateAllIndicators();
+        this.rollButton = rollButton;
+        this.rollValue = rollValue;
+        deactivateAllSprites();
     }
 
     public void assignNames(string[] playerNames)
@@ -23,12 +29,13 @@ public class IterationRendererComponent
         }
     }
 
-    private void deactivateAllIndicators()
+    private void deactivateAllSprites()
     {
         foreach (SpriteRenderer spriteRenderer in playerIndicatorSprites)
         {
             spriteRenderer.enabled = false;
         }
+        rollButton.enabled = false;
     }
 
     public void showPlayerIndicator(int playerIndex)
@@ -39,6 +46,11 @@ public class IterationRendererComponent
     public void hidePlayerIndicator(int playerIndex)
     {
         playerIndicatorSprites[playerIndex].enabled = false;
+    }
+
+    public void showRollButton()
+    {
+        rollButton.enabled = true;
     }
     
     

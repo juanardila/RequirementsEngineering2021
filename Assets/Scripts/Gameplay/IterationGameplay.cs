@@ -50,6 +50,11 @@ public class IterationGameplay
         return playersList[currentPlayer];
     }
 
+    public void allowRollDice()
+    {
+        iterationRendererComponent.showRollButton();
+    }
+
     
     
     

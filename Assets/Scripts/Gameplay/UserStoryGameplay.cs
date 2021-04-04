@@ -116,6 +116,6 @@ public class UserStoryGameplayComponent
     {
         PlayerGameplay.workedOnStory = this;
         userStoryRendererComponent.showWorkingInStory();
-        //Allow dice roll
+        Iteration.getInstance().getGameplaycomponent().allowRollDice();
     }
 }

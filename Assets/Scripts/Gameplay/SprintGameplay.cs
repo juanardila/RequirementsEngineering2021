@@ -40,6 +40,8 @@ public class SprintGameplay
             .getGameplayComponent().moveCardsToColumn(ColumnGameplayComponent.ONPROGRESS_TAG);
         Iteration.getInstance().getGameplaycomponent().startIteration();
     }
+
+    
     
 
     
