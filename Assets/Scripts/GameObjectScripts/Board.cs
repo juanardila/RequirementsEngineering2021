@@ -10,6 +10,10 @@ public class Board : MonoBehaviour
     public GameObject toDo;
     public GameObject onProgress;
     public GameObject done;
+    public ChanceDeck chanceDeck;
+    
+    public GameObject cardPrefab;
+    
     
     private static Board _instance;
 
@@ -28,6 +32,7 @@ public class Board : MonoBehaviour
         }
         else
         {
+            chanceDeck = new ChanceDeck();
             _instance = this;
         }
     }
@@ -50,7 +55,14 @@ public class Board : MonoBehaviour
                 throw new Exception("Invalid Column name");
         }
         
-    } 
+    }
+
+    public void showCard(ChanceCard chanceCard)
+    {
+        GameObject gameObject = Instantiate(cardPrefab);
+        Card cardComponent = gameObject.GetComponent<Card>();
+        cardComponent.instantiateOnBoard(chanceCard.chanceCardGameplayComponent, chanceCard.chanceCardRendererComponent);
+    }
     
 
 }

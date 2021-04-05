@@ -7,11 +7,14 @@ using UnityEngine;
  */
 public class CardRenderComponent
 {
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
 
     
     private const int baseLayer = 2;
     private const int raisedLayer = 3;
+
+    public CardRenderComponent()
+    {}
     
     public CardRenderComponent(SpriteRenderer spriteRenderer)
     {
@@ -27,5 +30,10 @@ public class CardRenderComponent
     public void putDownCard()
     {
         spriteRenderer.sortingOrder = baseLayer;
+    }
+
+    public void setSpriteRenderer(SpriteRenderer spriteRenderer)
+    {
+        this.spriteRenderer = spriteRenderer;
     }
 }

@@ -1,13 +1,20 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-
 public class IterationGameplay
 {
+    struct IterationFlags
+    {
+        bool substractOneFromEveryOneThisTurn;
+        Player skipsTurn;
+        bool everyOneSkipsTurn;
+    };
+    
     private IterationRendererComponent iterationRendererComponent;
     private Player[] playersList;
     private int day;
     private int currentPlayer;
+    private int rollValue;
 
     public IterationGameplay(IterationRendererComponent iterationRendererComponent)
     {
@@ -59,24 +66,35 @@ public class IterationGameplay
 
     public void rollDices()
     {
-        Debug.Log("!");
-        if (PlayerGameplay.workedOnStory != null )
+        if (PlayerGameplay.playerHasSelectedStory())
         {
             int firstRollValue = Dice.getInstance().
                 getFirstDiceGameplayComponent().rollDice();
             int secondRollValue = Dice.getInstance().
                 getSecondDiceGameplayComponent().rollDice();
-            iterationRendererComponent.showRollValue(firstRollValue + secondRollValue);
+            setRollValue(firstRollValue + secondRollValue);
             //Draw a card and apply changes
             int cardDrawn = Board.getInstance().chanceDeck.drawCard();
             //Broadcarst Dice and Card Information
-            iterationNetworkComponent.sendTurnInformation(rollValue, cardDrawn, PlayerGameplay.workedOnStory.id);
+            //iterationNetworkComponent.sendTurnInformation(rollValue, cardDrawn, PlayerGameplay.workedOnStory.id);
+            
         }
         
-        
     }
-    
-    
+
+    public void setRollValue(int rollValue)
+    {
+        this.rollValue = rollValue;
+        iterationRendererComponent.showRollValue(rollValue);
+    }
+
+    public int getRollValue()
+    {
+        return rollValue;
+    }
+
+
+
 
 
 }

@@ -45,4 +45,22 @@ public class FileManager : MonoBehaviour
         }
         return userStories;
     }
+
+    public Tuple<int, string, string, int, int>[] parseEvents()
+    {
+        JSONNode jsonEvents = _json["cards"]["event"];
+        Tuple<int, string, string, int, int>[] events  =
+            new Tuple<int, string, string, int, int>[jsonEvents.Count];
+        for (int index = 0; index < jsonEvents.Count; ++index)
+        {
+            events[index] = new Tuple<int, string, string, int, int>(
+                jsonEvents[index]["id"].AsInt,
+                jsonEvents[index]["title"].Value,
+                jsonEvents[index]["description"].Value,
+                jsonEvents[index]["event_code"].AsInt,
+                jsonEvents[index]["face"].AsInt
+            );
+        }
+        return events;
+    }
 }

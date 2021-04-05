@@ -18,9 +18,9 @@ public class UserStory : MonoBehaviour
     private UserStoryNetworkingComponent _userStoryNetworkingComponent;
 
     public const string TAG = "UserStory";
-    public TextMeshProUGUI id;
-    public TextMeshProUGUI title;
-    public TextMeshProUGUI points;
+    public TextMeshProUGUI idMesh;
+    public TextMeshProUGUI titleMesh;
+    public TextMeshProUGUI pointsMesh;
     public Sprite workInStorySprite;
     public Sprite workingInStorySprite;
     public Sprite workingDisabledSprite;
@@ -30,7 +30,7 @@ public class UserStory : MonoBehaviour
         Assert.AreEqual(tag, TAG);
         _userStoryNetworkingComponent = new UserStoryNetworkingComponent();
         _userStoryInteractionComponent = new UserStoryInteractionComponent();
-        _renderComponent = new UserStoryRendererComponent(GetComponent<SpriteRenderer>(), points,
+        _renderComponent = new UserStoryRendererComponent(GetComponent<SpriteRenderer>(), pointsMesh,
             workInStorySprite, workingInStorySprite, workingDisabledSprite);
         _userStoryGameplayComponent = new UserStoryGameplayComponent(_userStoryInteractionComponent,
             GetComponent<Transform>(), _userStoryNetworkingComponent, _renderComponent);
@@ -43,10 +43,10 @@ public class UserStory : MonoBehaviour
      */
     public void initializeGameplay(int id, string title, int points)
     {
-        this.id.text = id.ToString();
-        this.title.text = title;
-        this.points.text = points.ToString();
-        _userStoryGameplayComponent.initializeRunTimeAttributes(id, title, points, this.points);
+        this.idMesh.text = id.ToString();
+        this.titleMesh.text = title;
+        this.pointsMesh.text = points.ToString();
+        _userStoryGameplayComponent.initializeRunTimeAttributes(id, title, points, this.pointsMesh);
         Board.getInstance().getColumn(ColumnGameplayComponent.BACLOG_TAG)
             .add(_userStoryGameplayComponent, GetComponent<Transform>());
     }

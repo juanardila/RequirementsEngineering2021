@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 2463276181664537272}
   - component: {fileID: 2463276181664537274}
   - component: {fileID: 2463276181664537273}
+  - component: {fileID: 2145508322789052970}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -268,6 +269,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2145508322789052970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463276181664537255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49af1a530d954c718e3949fa93c89a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleMesh: {fileID: 0}
+  descriptionMesh: {fileID: 0}
 --- !u!1 &2463276181728699811
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2463276182164220852}
   - component: {fileID: 2463276182164220851}
+  - component: {fileID: 6984342901464600758}
   m_Layer: 0
   m_Name: ProblemCard
   m_TagString: Untagged
@@ -452,3 +468,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6984342901464600758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463276182164220850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49af1a530d954c718e3949fa93c89a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleMesh: {fileID: 2463276181664537273}
+  descriptionMesh: {fileID: 2463276181620613015}

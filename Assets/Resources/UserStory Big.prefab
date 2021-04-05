@@ -124,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34738bd6083957f4bbec79ca89fc2643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: {fileID: 4672682087206993484}
-  title: {fileID: 4672682086874842427}
-  points: {fileID: 4672682087095598951}
+  idMesh: {fileID: 4672682087206993484}
+  titleMesh: {fileID: 4672682086874842427}
+  pointsMesh: {fileID: 4672682087095598951}
   workInStorySprite: {fileID: 21300000, guid: 92babb011c1ef4443ac793172c145fcd, type: 3}
   workingInStorySprite: {fileID: 21300000, guid: 8a8870e793534fb4e9558a927abe04e4, type: 3}
   workingDisabledSprite: {fileID: 21300000, guid: af4f7a16770b93547ab92d7a5df9f727, type: 3}

@@ -8,9 +8,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour, IOnEventCallback
 {
     public GameObject userStoryPrefab;
+    public Sprite happyEventSprite;
+    public Sprite neutralEventSprite;
+    public Sprite sadEventSprite;
+    public Sprite solutionSprite;
+    public Sprite problemSprite;
+
     private void Start()
     {
+        ChanceCardRenderComponent.happySprite = this.happyEventSprite;
+        ChanceCardRenderComponent.badSprite = this.sadEventSprite;
+        ChanceCardRenderComponent.neutralSprite = this.neutralEventSprite;
+        ChanceCardRenderComponent.solutionSprite = this.solutionSprite;
+        ChanceCardRenderComponent.problemSprite = this.problemSprite;
+        
         PhotonNetwork.AddCallbackTarget(this);
+        
         Tuple<int, string, int>[] userStories = FileManager.getInstance().parseUserStories();
         foreach (Tuple<int, string, int> userStoryData in userStories)
         {
@@ -18,8 +31,19 @@ public class GameManager : MonoBehaviour, IOnEventCallback
             UserStory userStory = userStoryGameObject.GetComponent<UserStory>();
             userStory.initializeGameplay(userStoryData.Item1, userStoryData.Item2, userStoryData.Item3);
         }
+
+        Tuple<int, string, string, int, int>[] events = FileManager.getInstance().parseEvents();
+        foreach(Tuple<int, string, string, int, int> entry in events)
+        {
+            ChanceCard chanceCard = new ChanceCard();
+            chanceCard.chanceCardGameplayComponent = new ChanceCardGameplayComponent( entry.Item2,
+                entry.Item3, Command.CommandFactory(entry.Item4));
+            chanceCard.chanceCardRendererComponent = new ChanceCardRenderComponent(
+                ChanceCardRenderComponent.CardType.EVENT,
+                entry.Item5, chanceCard.chanceCardGameplayComponent);
+            Board.getInstance().chanceDeck.addCard(entry.Item1, chanceCard);
+        }
     }
-    
     
     public void OnEvent(EventData photonEvent)
     {

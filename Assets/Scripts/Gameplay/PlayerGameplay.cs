@@ -30,4 +30,9 @@ public class PlayerGameplay
             storyNode.userStoryGameplayComponent.setUnAvailableToWork();
         }
     }
+
+    public static bool playerHasSelectedStory()
+    {
+        return workedOnStory != null;
+    }
 }
