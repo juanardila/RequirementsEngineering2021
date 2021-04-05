@@ -28,7 +28,7 @@ public class IterationGameplay
             iterationRendererComponent.assignNames(Iteration.getPlayerNames());
             playersList = PhotonNetwork.PlayerList;    
         }
-        day = 1;
+        setDay(1);
         currentPlayer = 0;
         iterationRendererComponent.showPlayerIndicator(currentPlayer);
         PlayerGameplay.startDailyWork();
@@ -36,17 +36,34 @@ public class IterationGameplay
     
     public void nextPlayerWorks()
     {
+        iterationRendererComponent.hideFinishTurn();
         iterationRendererComponent.hidePlayerIndicator(currentPlayer);
+        currentPlayer++;
         if (currentPlayer < playersList.Length)
         {
-            currentPlayer++;
             iterationRendererComponent.showPlayerIndicator(currentPlayer);
             PlayerGameplay.startDailyWork();
         }
         else
         {
             currentPlayer = 0;
+            iterationRendererComponent.showStartNextDayOrPhaseButton();
         }
+    }
+
+    public void advanceDay()
+    {
+        if (day < 3)
+        {
+            setDay(day + 1);
+            iterationRendererComponent.showPlayerIndicator(currentPlayer);
+            //nextPlayerWorks();    
+        }
+        else
+        {
+            Sprint.getInstance().getGameplayComponent().advanceToSpringReview();
+        }
+        iterationRendererComponent.hideStartNextDayOrPhaseButton();
     }
     
     public int getPlayerIndex()
@@ -68,6 +85,7 @@ public class IterationGameplay
     {
         if (PlayerGameplay.playerHasSelectedStory())
         {
+            iterationRendererComponent.hideRollButton();
             int firstRollValue = Dice.getInstance().
                 getFirstDiceGameplayComponent().rollDice();
             int secondRollValue = Dice.getInstance().
@@ -77,7 +95,7 @@ public class IterationGameplay
             int cardDrawn = Board.getInstance().chanceDeck.drawCard();
             //Broadcarst Dice and Card Information
             //iterationNetworkComponent.sendTurnInformation(rollValue, cardDrawn, PlayerGameplay.workedOnStory.id);
-            
+            iterationRendererComponent.showFinishTurn();
         }
         
     }
@@ -92,6 +110,14 @@ public class IterationGameplay
     {
         return rollValue;
     }
+
+    public void setDay(int dayValue)
+    {
+        day = dayValue;
+        iterationRendererComponent.setDayMesh(dayValue);
+    }
+
+    
 
 
 

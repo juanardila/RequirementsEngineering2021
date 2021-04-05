@@ -20,6 +20,7 @@ public class SprintGameplay
         this.phase = Phase.PlanningAndCommitment;
         this.sprintRenderComponent = sprintRenderComponent;
         sprintRenderComponent.showPlanningAndCommitementSprite();
+        sprintRenderComponent.hideSprintRetrospective();
     }
 
     public Phase getPhase()
@@ -39,6 +40,14 @@ public class SprintGameplay
         Board.getInstance().toDo.GetComponent<Column>()
             .getGameplayComponent().moveCardsToColumn(ColumnGameplayComponent.ONPROGRESS_TAG);
         Iteration.getInstance().getGameplaycomponent().startIteration();
+    }
+
+    public void advanceToSpringReview()
+    {
+        sprintRenderComponent.showSprintRetrospective();
+        phase = Phase.SpringReviewAndRetrospective;
+        Board.getInstance().onProgress.GetComponent<Column>()
+            .getGameplayComponent().moveCardsToColumn(ColumnGameplayComponent.DONE_TAG);
     }
 
     

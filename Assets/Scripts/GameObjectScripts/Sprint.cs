@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Sprint : MonoBehaviour
 {
-    public TextMeshProUGUI sprintNumber;
-    public SpriteRenderer planningAndCommitmentSprite;
-    public SpriteRenderer advanteToWorkWithInIteration;
+    public TextMeshProUGUI SprintNumber;
+    public SpriteRenderer PlanningAndCommitmentSprite;
+    public SpriteRenderer AdvanteToWorkWithInIteration;
+    public SpriteRenderer AdvanceToSprintPlanning;
+    public SpriteRenderer SprintRetrospective;
+    
     
     private SprintGameplay _sprintGameplay;
     private SprintRenderComponent _sprintRenderComponent;
@@ -28,7 +31,8 @@ public class Sprint : MonoBehaviour
         }
         else
         {
-            _sprintRenderComponent = new SprintRenderComponent(planningAndCommitmentSprite, advanteToWorkWithInIteration);
+            _sprintRenderComponent = new SprintRenderComponent(PlanningAndCommitmentSprite,
+                AdvanteToWorkWithInIteration, SprintRetrospective, AdvanceToSprintPlanning);
             _sprintGameplay = new SprintGameplay(_sprintRenderComponent);
             _instance = this;
         }
@@ -48,6 +52,8 @@ public class Sprint : MonoBehaviour
     {
         _sprintGameplay.advanceToWorkWithInIteration();
     }
+    
+    
     
     
     

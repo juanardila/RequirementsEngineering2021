@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine;
 
 public class PlayerGameplay
 {
@@ -12,6 +13,8 @@ public class PlayerGameplay
         if (Iteration.getInstance().getGameplaycomponent().
             getCurrentPlayer().Equals(myself))
         {
+            
+            Iteration.getInstance().rollButton.enabled = true;
             LinkedList<StoryNode> storiesInProgress = Board.getInstance().onProgress.GetComponent<Column>()
                 .getGameplayComponent().getStories();
             foreach (StoryNode storyNode in storiesInProgress)

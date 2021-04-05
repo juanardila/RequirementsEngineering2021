@@ -19,4 +19,9 @@ class SprintInputHandler
             sprintNetworkComponent.sendAdvanceToWorkInIteration();
         }
     }
+
+    public void nextTurn()
+    {
+        
+    }
 }

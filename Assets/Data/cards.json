@@ -141,35 +141,35 @@
                 "face":3
             }, 
             {
-                "id":23,
+                "id":24,
                 "title":"BUSINESS TRIP",
                 "description":"You are sent on a business trip. Skip next turn.",
                 "event_code":7,
                 "face":3
             },
             {
-                "id":24,
+                "id":25,
                 "title":"REQUIREMENTS CHANGE",
                 "description":"PO decided to make changes to the project. So this story will take 4 hours more.",
                 "event_code":10,
                 "face":3
             },
             {
-                "id":25,
+                "id":26,
                 "title":"EXTRA COST",
                 "description":"Your work costs more than planned. Add 6 hours to the story estimation.",
                 "event_code":11,
                 "face":3
             },
             {
-                "id":26,
+                "id":27,
                 "title":"BIRTHDAY",
                 "description":"It is your birthday today. Subtract 1 point from everybody's dice roll today.",
                 "event_code":12,
                 "face":2
             }, 
             {
-                "id":27,
+                "id":28,
                 "title":"OVERTIME",
                 "description":"You have worked overtime. Draw another card and follow its instruction.",
                 "event_code":13,
@@ -178,119 +178,119 @@
         ],
         "solution":[
             {
-                "id":28,
+                "id":29,
                 "title":"GET SOME REST",
                 "description":"Get some rest to refresh your mind."
             },
             {
-                "id":29,
+                "id":30,
                 "title":"CONSULTING",
                 "description":"Involve a skilled team member from other team to consult you."
             },
             {
-                "id":30,
+                "id":31,
                 "title":"EXTRA MEMBER",
                 "description":"Add another member to the team. Throw dice once at any moment you want."
             },  
             {
-                "id":31,
+                "id":32,
                 "title":"COMMUNICATION",
                 "description":"Enhance communication."
             },
             {
-                "id":32,
+                "id":33,
                 "title":"SPECIALIST",
                 "description":"Engage a specialist."
             }, 
             {
-                "id":33,
+                "id":34,
                 "title":"AUTOMATED TESTING",
                 "description":"Introduce automated testing."
             },
             {
-                "id":34,
+                "id":35,
                 "title":"TL-SUPPORT",
                 "description":"Your team lead is ready to take a part of the work."
             }, 
             {
-                "id":35,
+                "id":36,
                 "title":"SHARE GOALS",
                 "description":"Get the team together and share the key project goals."
             },
             {
-                "id":36,
+                "id":37,
                 "title":"DEEP INSIGHT",
                 "description":"Apply your deep domain knowledge."
             },
             {
-                "id":37,
+                "id":38,
                 "title":"LESSONS LEARNT",
                 "description":"Apply experience destilled from former retrospectives."
             },
             {
-                "id":38,
+                "id":39,
                 "title":"COLLABORATION",
                 "description":"Get the team together with PO and exchange information."
             },
             {
-                "id":39,
+                "id":40,
                 "title":"PAIR PROGRAMMING",
                 "description":"Apply pair programming."
             },  
             {
-                "id":40,
+                "id":41,
                 "title":"ENHANCE SKILLS",
                 "description":"Get training for raising the level of your skill."
             }
         ],
         "problem":[
             {
-                "id":41,
+                "id":42,
                 "title":"TECHNICAL OBSTACLE",
                 "description":"Your work is blocked by a technical obstacle."
             },
             {
-                "id":42,
+                "id":43,
                 "title":"BAD QUALITY",
                 "description":"You cannot finish the story because the quality is inadequate."
             },
             {
-                "id":43,
+                "id":44,
                 "title":"UNCLEAR SPEC",
                 "description":"The specification is not clear enough for you."
             },
             {
-                "id":44,
+                "id":45,
                 "title":"UNSATISFIED USERS",
                 "description":"You feel that users are not satisfied."
             },
             {
-                "id":45,
+                "id":46,
                 "title":"DATA IS MISSING",
                 "description":"You can't work with the story, as you don't have important data from PO."
             },
             {
-                "id":46,
+                "id":47,
                 "title":"BAD COMMUNICATION",
                 "description":"You cannot communicate well with other team members. They just don't get you."
             },    
             {
-                "id":47,
+                "id":48,
                 "title":"POOR SKILLS",
                 "description":"You are not skilled enough to finish the work."
             },  
             {
-                "id":48,
+                "id":49,
                 "title":"UNSTABLE SYSTEM",
                 "description":"System is very unstable. You have to test with major difficulties"
             }, 
             {
-                "id":49,
+                "id":50,
                 "title":"BAD MOOD",
                 "description":"Today you are upset. So you are too lazy to work."
             },
             {
-                "id":50,
+                "id":51,
                 "title":"INTEGRATION ISSUES",
                 "description":"Your colleague provided you with the component, which is different from what you expected. Your work is blocked."
             }

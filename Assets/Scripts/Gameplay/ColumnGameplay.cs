@@ -48,7 +48,11 @@ public class ColumnGameplayComponent
                 if(columnTag != ONPROGRESS_TAG)
                     moveCardsToColumn(Board.getInstance().onProgress.GetComponent<Column>().getGameplayComponent());
                 break;
-        }
+            case DONE_TAG:
+                if(columnTag != DONE_TAG)
+                    moveCardsToColumn(Board.getInstance().done.GetComponent<Column>().getGameplayComponent());
+                break;
+        }       
         
     }
 

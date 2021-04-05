@@ -21,6 +21,10 @@ public class Iteration : MonoBehaviour
     public TextMeshProUGUI player6Name;
     public SpriteRenderer rollButton;
     public TextMeshProUGUI rollValue;
+    public SpriteRenderer finishTurnButton;
+    public SpriteRenderer nextDayOrPhaseButton;
+    public TextMeshProUGUI dayMesh;
+
 
     private IterationGameplay _iterationGameplay;
     private IterationRendererComponent _iterationRendererComponent;
@@ -55,7 +59,8 @@ public class Iteration : MonoBehaviour
                 player5Name,
                 player6Name };
             _iterationRendererComponent = new IterationRendererComponent(playerNameMeshes,
-                playerIndicators, rollButton, rollValue);
+                playerIndicators, rollButton, rollValue, finishTurnButton, nextDayOrPhaseButton,
+                dayMesh);
             _iterationGameplay = new IterationGameplay(_iterationRendererComponent);
             _instance = this;
         }

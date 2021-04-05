@@ -3,16 +3,20 @@
 public class SprintRenderComponent
 {
     private SpriteRenderer planningAndCommitmentSprite;
-    private SpriteRenderer springReviewAndRetrospective;
+    private SpriteRenderer sprintReviewAndRetrospectiveSprite;
     private SpriteRenderer advanceToWorkWithInIterationSprite;
-    private SpriteRenderer advanceToSprintReviewAndRetrospectiveSprite;
-    private SpriteRenderer advanceSprint;
+    private SpriteRenderer advanceToPlanningAndCommitementSprite;
 
-    public SprintRenderComponent(SpriteRenderer planningAndCommitmentSprite, SpriteRenderer advanceToWorkWithInIterationSprite)
+
+
+    public SprintRenderComponent(SpriteRenderer planningAndCommitmentSprite,
+        SpriteRenderer advanceToWorkWithInIterationSprite,
+        SpriteRenderer sprintRetrospective, SpriteRenderer advanceToPlanningSprite )
     {
         this.planningAndCommitmentSprite = planningAndCommitmentSprite;
         this.advanceToWorkWithInIterationSprite = advanceToWorkWithInIterationSprite;
-        
+        this.advanceToPlanningAndCommitementSprite = advanceToPlanningSprite;
+        this.sprintReviewAndRetrospectiveSprite = sprintRetrospective;
 
     }
 
@@ -26,6 +30,18 @@ public class SprintRenderComponent
     {
         planningAndCommitmentSprite.enabled = false;
         advanceToWorkWithInIterationSprite.enabled = false;
+    }
+
+    public void showSprintRetrospective()
+    {
+        sprintReviewAndRetrospectiveSprite.enabled = true;
+        advanceToPlanningAndCommitementSprite.enabled = true;
+    }
+    
+    public void hideSprintRetrospective()
+    {
+        sprintReviewAndRetrospectiveSprite.enabled = false;
+        advanceToPlanningAndCommitementSprite.enabled = false;
     }
     
 
