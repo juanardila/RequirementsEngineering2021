@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using Photon.Realtime;
-using UnityEngine;
-using UnityEngine.WSA;
 
 public class Turn
 {
@@ -52,11 +49,20 @@ public class Turn
                     iterationRendererComponent.hideFinishTurn();
                     iterationRendererComponent.hidePlayerIndicator(playerIndex);
                     hideAvailableUserStories();
-                    round.finishTurn();
+                    round.finishLocalTurn();
                     //iteration network component
                     break;
             }
         }
+        else
+        {
+            iterationRendererComponent.showPlayerIndicator(playerIndex);
+        }
+    }
+
+    private void resetState()
+    {
+        turnState = TurnState.ROLLED_DICES;
     }
     
     private static void showAvailableUserStories()

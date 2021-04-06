@@ -52,16 +52,21 @@ public class Round
         
     }
 
-    public void finishTurn()
+    public void finishLocalTurn()
     {
         playerPlayingIndex++;
         if (!isOver())
         {
             turn = new Turn(iterationRendererComponent, this);
-            turn.play(playerPlayingIndex);
+            iterationRendererComponent.showPlayerIndicator(playerPlayingIndex);
         }
-        iterationRendererComponent.showStartNextDayOrPhaseButton();
+        else
+        {
+            iterationRendererComponent.showStartNextDayOrPhaseButton();    
+        }
     }
+    
+    
     
     public bool isOver()
     {
