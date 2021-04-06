@@ -31,10 +31,11 @@ public class UserStoryInputHandler
             draggableInputHandler.onClick(transform.localPosition); //Let base class control dragging states
             userStoryRenderComponent.raiseCard();    
         } else if (Sprint.getInstance().getGameplayComponent().getPhase() == SprintGameplay.Phase.WorkWithInIteration &&
-                   userStoryGameplayComponent.storyCanBeWorkedOn() && 
-                   Iteration.getInstance().getGameplaycomponent().getCurrentPlayer().Equals(PhotonNetwork.LocalPlayer) )
+                   !userStoryGameplayComponent.isDone() )
         {
-            userStoryGameplayComponent.workInThisStory();
+            Iteration.getInstance().getGameplaycomponent().getRound()
+                .getTurn().workInThisStory(userStoryGameplayComponent);
+            userStoryRenderComponent.showWorkingInStory();
         }
     }
 

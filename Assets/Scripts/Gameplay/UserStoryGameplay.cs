@@ -18,7 +18,6 @@ public class UserStoryGameplayComponent
     
     private string currentColumn;
     private TextMeshProUGUI pointsMesh;
-    private bool canBeWorkedOn;
 
     public UserStoryGameplayComponent(UserStoryInteractionComponent userStoryInteractionComponent, Transform userStoryTransform,
         UserStoryNetworkingComponent userStoryNetworkingComponent, UserStoryRendererComponent userStoryRendererComponent)
@@ -28,7 +27,6 @@ public class UserStoryGameplayComponent
         this.userStoryTransform = userStoryTransform;
         this.userStoryNetworkingComponent = userStoryNetworkingComponent;
         this.userStoryRendererComponent = userStoryRendererComponent;
-        this.canBeWorkedOn = false;
     }
     
     public void initializeRunTimeAttributes(int id, string title, int points, TextMeshProUGUI pointsMesh)
@@ -93,29 +91,36 @@ public class UserStoryGameplayComponent
     
     public void setAvailableToWork()
     {
-        this.canBeWorkedOn = true;
-        userStoryRendererComponent.showWorkInStory();
+        if (isDone())
+        {
+            userStoryRendererComponent.showDefault();
+        }
+        else
+        {
+            userStoryRendererComponent.showWorkInStory();    
+        }
+        
     }
     public void setUnAvailableToWork()
     {
-        this.canBeWorkedOn = false;
+        userStoryRendererComponent.showDefault();
     }
 
-    public bool storyCanBeWorkedOn()
-    {
-        return this.canBeWorkedOn;
-    }
-    
-    private void setPoints(int points)
+    public void setPoints(int points)
     {
         this.points = points;
         userStoryRendererComponent.setPointsText(points);
     }
 
-    public void workInThisStory()
+    // public void workInThisStory()
+    // {
+    //     PlayerGameplay.workedOnStory = this;
+    //     userStoryRendererComponent.showWorkingInStory();
+    //     Iteration.getInstance().getGameplaycomponent().allowRollDice();
+    // }
+
+    public bool isDone()
     {
-        PlayerGameplay.workedOnStory = this;
-        userStoryRendererComponent.showWorkingInStory();
-        Iteration.getInstance().getGameplaycomponent().allowRollDice();
+        return points <= 0;
     }
 }

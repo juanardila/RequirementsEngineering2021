@@ -2,7 +2,7 @@
 {
     public override int execute()
     {
-        iterationGameplay.setRollValue(iterationGameplay.getRollValue() + 2);
+        iterationGameplay.getRound().getTurn().addToDiceResult(2);
         return 0;
     }
 }

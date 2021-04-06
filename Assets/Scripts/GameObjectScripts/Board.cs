@@ -56,12 +56,19 @@ public class Board : MonoBehaviour
         }
         
     }
+    
+    private GameObject instantiatedCard;
 
     public void showCard(ChanceCard chanceCard)
     {
-        GameObject gameObject = Instantiate(cardPrefab);
-        Card cardComponent = gameObject.GetComponent<Card>();
+        instantiatedCard = Instantiate(cardPrefab);
+        Card cardComponent = instantiatedCard.GetComponent<Card>();
         cardComponent.instantiateOnBoard(chanceCard.chanceCardGameplayComponent, chanceCard.chanceCardRendererComponent);
+    }
+
+    public void deleteInstantiatedCard()
+    {
+        Destroy(instantiatedCard);
     }
     
 

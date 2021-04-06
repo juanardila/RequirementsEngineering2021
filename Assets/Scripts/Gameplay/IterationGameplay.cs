@@ -1,115 +1,48 @@
-﻿using Photon.Pun;
+﻿using System.Linq;
+using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-public class IterationGameplay
+public class IterationGameplayComponent
 {
-    struct IterationFlags
+    enum IterationState
     {
-        bool substractOneFromEveryOneThisTurn;
-        Player skipsTurn;
-        bool everyOneSkipsTurn;
-    };
-    
-    private IterationRendererComponent iterationRendererComponent;
-    private Player[] playersList;
-    private int day;
-    private int currentPlayer;
-    private int rollValue;
+        WORKING,
+        SOLVING_PROBLEMS
+    }
 
-    public IterationGameplay(IterationRendererComponent iterationRendererComponent)
+    private IterationRendererComponent iterationRendererComponent;
+    private int day;
+    private Round round;
+    public const int FIRST_DAY = 1;
+    public const int MAX_DAY = 3;
+    private IterationState iterationState = IterationState.WORKING;
+    public static string[] getPlayerNames()
+    {
+        string[] names = new string[PhotonNetwork.PlayerList.Length];
+        int index = 0;
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            names[index++] = player.NickName;
+        }
+
+        return names;
+    }
+
+    public IterationGameplayComponent(IterationRendererComponent iterationRendererComponent)
     {
         this.iterationRendererComponent = iterationRendererComponent;
+        setDay(FIRST_DAY);
     }
     
-    public void startIteration()
+    public void startWorkInIteration()
     {
-        if (Sprint.getInstance().getGameplayComponent().getSprintNumber() == 1)
-        {
-            iterationRendererComponent.assignNames(Iteration.getPlayerNames());
-            playersList = PhotonNetwork.PlayerList;    
-        }
-        setDay(1);
-        currentPlayer = 0;
-        iterationRendererComponent.showPlayerIndicator(currentPlayer);
-        PlayerGameplay.startDailyWork();
+        iterationRendererComponent.assignNames(getPlayerNames());
+        round = new Round(PhotonNetwork.PlayerList.ToArray(), this,
+            iterationRendererComponent);
+        round.start();
     }
     
-    public void nextPlayerWorks()
-    {
-        iterationRendererComponent.hideFinishTurn();
-        iterationRendererComponent.hidePlayerIndicator(currentPlayer);
-        currentPlayer++;
-        if (currentPlayer < playersList.Length)
-        {
-            iterationRendererComponent.showPlayerIndicator(currentPlayer);
-            PlayerGameplay.startDailyWork();
-        }
-        else
-        {
-            currentPlayer = 0;
-            iterationRendererComponent.showStartNextDayOrPhaseButton();
-        }
-    }
-
-    public void advanceDay()
-    {
-        if (day < 3)
-        {
-            setDay(day + 1);
-            iterationRendererComponent.showPlayerIndicator(currentPlayer);
-            //nextPlayerWorks();    
-        }
-        else
-        {
-            Sprint.getInstance().getGameplayComponent().advanceToSpringReview();
-        }
-        iterationRendererComponent.hideStartNextDayOrPhaseButton();
-    }
     
-    public int getPlayerIndex()
-    {
-        return currentPlayer;
-    }
-
-    public Player getCurrentPlayer()
-    {
-        return playersList[currentPlayer];
-    }
-
-    public void allowRollDice()
-    {
-        iterationRendererComponent.showRollButton();
-    }
-
-    public void rollDices()
-    {
-        if (PlayerGameplay.playerHasSelectedStory())
-        {
-            iterationRendererComponent.hideRollButton();
-            int firstRollValue = Dice.getInstance().
-                getFirstDiceGameplayComponent().rollDice();
-            int secondRollValue = Dice.getInstance().
-                getSecondDiceGameplayComponent().rollDice();
-            setRollValue(firstRollValue + secondRollValue);
-            //Draw a card and apply changes
-            int cardDrawn = Board.getInstance().chanceDeck.drawCard();
-            //Broadcarst Dice and Card Information
-            //iterationNetworkComponent.sendTurnInformation(rollValue, cardDrawn, PlayerGameplay.workedOnStory.id);
-            iterationRendererComponent.showFinishTurn();
-        }
-        
-    }
-
-    public void setRollValue(int rollValue)
-    {
-        this.rollValue = rollValue;
-        iterationRendererComponent.showRollValue(rollValue);
-    }
-
-    public int getRollValue()
-    {
-        return rollValue;
-    }
 
     public void setDay(int dayValue)
     {
@@ -117,7 +50,154 @@ public class IterationGameplay
         iterationRendererComponent.setDayMesh(dayValue);
     }
 
-    
+    public Round getRound()
+    {
+        return round;
+    }
+
+    public void endIteration()
+    {
+        if (!isOver())
+        {
+            setDay(day + 1);
+            round = new Round(PhotonNetwork.PlayerList.ToArray(), this,
+                iterationRendererComponent);
+            round.start();
+        }
+        else
+        {
+            Sprint.getInstance().getGameplayComponent().advanceToSpringReview();
+        }
+        iterationRendererComponent.hideStartNextDayOrPhaseButton();
+        
+    }
+
+    public bool isOver()
+    {
+        return day >= MAX_DAY;
+    }
+
+
+    // public IterationGameplay(IterationRendererComponent iterationRendererComponent)
+    // {
+    //     this.iterationRendererComponent = iterationRendererComponent;
+    // }
+    //
+    // public void start()
+    // {
+    //     if (Sprint.getInstance().getGameplayComponent()
+    //         .getSprintNumber() == START_ITERATION)
+    //     {
+    //         playersList = PhotonNetwork.PlayerList;
+    //         iterationRendererComponent.assignNames(getPlayerNames());
+    //             
+    //     }
+    //     setDay(START_DAY);
+    //     Round round = new Round(playersList);
+    //     round.play();
+    // }
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    // public void nextPlayerWorks()
+    // {
+    //     //iterationRendererComponent.hideFinishTurn();
+    //     //iterationRendererComponent.hidePlayerIndicator(currentPlayer);
+    //     //Board.getInstance().deleteInstantiatedCard();
+    //     if (currentPlayer < playersList.Length)
+    //     {
+    //         PlayerGameplay.startDailyWork();
+    //         iterationRendererComponent.showPlayerIndicator(currentPlayer);
+    //     }
+    //     else
+    //     {
+    //         currentPlayer = 0;
+    //         iterationRendererComponent.showStartNextDayOrPhaseButton();
+    //     }
+    // }
+    //
+    // public void advanceDay()
+    // {
+    //     if (day < MAX_DAYS)
+    //     {
+    //         setDay(day + 1);
+    //         iterationRendererComponent.showPlayerIndicator(currentPlayer);
+    //         nextPlayerWorks();
+    //     }
+    //     else
+    //     {
+    //         Sprint.getInstance().getGameplayComponent().advanceToSpringReview();
+    //     }
+    //     iterationRendererComponent.hideStartNextDayOrPhaseButton();
+    // }
+    //
+    // public int getPlayerIndex()
+    // {
+    //     return currentPlayer;
+    // }
+    //
+    // public Player getCurrentPlayer()
+    // {
+    //     return playersList[currentPlayer];
+    // }
+    //
+    // public void allowRollDice()
+    // {
+    //     iterationRendererComponent.showRollButton();
+    // }
+    //
+    // public void rollDices()
+    // {
+    //     if (PlayerGameplay.playerHasSelectedStory() )
+    //     {
+    //         iterationRendererComponent.hideRollButton();
+    //         int firstRollValue = Dice.getInstance().
+    //             getFirstDiceGameplayComponent().rollDice();
+    //         int secondRollValue = Dice.getInstance().
+    //             getSecondDiceGameplayComponent().rollDice();
+    //         setRollValue(firstRollValue + secondRollValue);
+    //         //Draw a card and apply changes
+    //         int cardDrawn = Board.getInstance().chanceDeck.drawCard();
+    //         //Broadcarst Dice and Card Information
+    //         //iterationNetworkComponent.sendTurnInformation(rollValue, cardDrawn, PlayerGameplay.workedOnStory.id);
+    //         iterationRendererComponent.showFinishTurn();
+    //         currentPlayer++;
+    //     }
+    //     
+    // }
+    //
+    // public void setRollValue(int rollValue)
+    // {
+    //     this.rollValue = rollValue;
+    //     iterationRendererComponent.showRollValue(rollValue);
+    // }
+    //
+    // public int getRollValue()
+    // {
+    //     return rollValue;
+    // }
+    //
+
+    //
 
 
 

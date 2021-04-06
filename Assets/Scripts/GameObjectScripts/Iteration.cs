@@ -26,7 +26,7 @@ public class Iteration : MonoBehaviour
     public TextMeshProUGUI dayMesh;
 
 
-    private IterationGameplay _iterationGameplay;
+    private IterationGameplayComponent _iterationGameplayComponent;
     private IterationRendererComponent _iterationRendererComponent;
     
     private static Iteration _instance;
@@ -61,27 +61,15 @@ public class Iteration : MonoBehaviour
             _iterationRendererComponent = new IterationRendererComponent(playerNameMeshes,
                 playerIndicators, rollButton, rollValue, finishTurnButton, nextDayOrPhaseButton,
                 dayMesh);
-            _iterationGameplay = new IterationGameplay(_iterationRendererComponent);
+            _iterationGameplayComponent = new IterationGameplayComponent(_iterationRendererComponent);
             _instance = this;
         }
         
     }
 
-    public static string[] getPlayerNames()
+    public IterationGameplayComponent getGameplaycomponent()
     {
-        string[] names = new string[PhotonNetwork.PlayerList.Length];
-        int index = 0;
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            names[index++] = player.NickName;
-        }
-
-        return names;
-    }
-
-    public IterationGameplay getGameplaycomponent()
-    {
-        return _iterationGameplay;
+        return _iterationGameplayComponent;
     }
 
 

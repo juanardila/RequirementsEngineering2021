@@ -39,7 +39,7 @@ public class SprintGameplay
         sprintRenderComponent.hidePlanningAndCommitementSprite();
         Board.getInstance().toDo.GetComponent<Column>()
             .getGameplayComponent().moveCardsToColumn(ColumnGameplayComponent.ONPROGRESS_TAG);
-        Iteration.getInstance().getGameplaycomponent().startIteration();
+        Iteration.getInstance().getGameplaycomponent().startWorkInIteration();
     }
 
     public void advanceToSpringReview()
@@ -48,6 +48,11 @@ public class SprintGameplay
         phase = Phase.SpringReviewAndRetrospective;
         Board.getInstance().onProgress.GetComponent<Column>()
             .getGameplayComponent().moveCardsToColumn(ColumnGameplayComponent.DONE_TAG);
+    }
+
+    private void setSprint(int sprintValue)
+    {
+        
     }
 
     

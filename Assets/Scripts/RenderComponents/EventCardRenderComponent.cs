@@ -47,10 +47,29 @@ public class ChanceCardRenderComponent : CardRenderComponent
         }
     }
 
-    public void draw(SpriteRenderer spriteRenderer, TextMeshProUGUI titleMesh)
+    public ChanceCardRenderComponent(CardType cardType,
+        ChanceCardGameplayComponent cardGameplayComponent)
+    {
+        this.cardGameplayComponent = cardGameplayComponent;
+        switch (cardType)
+        {
+            case CardType.PROBLEM:
+                this.cardSprite = problemSprite;
+                break;
+            case CardType.SOLUTION:
+                this.cardSprite = solutionSprite;
+                break;
+            default:
+                throw new Exception("Invalid Card Type");
+        }
+    }
+    
+
+    public void draw(SpriteRenderer spriteRenderer, TextMeshProUGUI titleMesh, TextMeshProUGUI descriptionMesh)
     {
         setSpriteRenderer(spriteRenderer);
         titleMesh.text = cardGameplayComponent.getTitle();
+        descriptionMesh.text = cardGameplayComponent.getDescription();
         this.spriteRenderer.sprite = this.cardSprite;
     }
 }

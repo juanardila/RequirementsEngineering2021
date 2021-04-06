@@ -43,6 +43,19 @@ public class GameManager : MonoBehaviour, IOnEventCallback
                 entry.Item5, chanceCard.chanceCardGameplayComponent);
             Board.getInstance().chanceDeck.addCard(entry.Item1, chanceCard);
         }
+        
+        Tuple<int, string, string>[] problems = FileManager.getInstance().parseProblems();
+        foreach(Tuple<int, string, string> entry in problems)
+        {
+            ChanceCard chanceCard = new ChanceCard();
+            chanceCard.chanceCardGameplayComponent = new ChanceCardGameplayComponent( entry.Item2,
+                entry.Item3, Command.CommandFactory((int)ChanceCardGameplayComponent.EventCode.PROBLEM));
+            chanceCard.chanceCardRendererComponent = new ChanceCardRenderComponent(
+                ChanceCardRenderComponent.CardType.PROBLEM, chanceCard.chanceCardGameplayComponent );
+            Board.getInstance().chanceDeck.addCard(entry.Item1, chanceCard);
+        }
+        
+        
     }
     
     public void OnEvent(EventData photonEvent)

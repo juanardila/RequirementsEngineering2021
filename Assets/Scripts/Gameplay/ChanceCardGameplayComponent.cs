@@ -45,5 +45,9 @@ public class ChanceCardGameplayComponent
     {
         return title;
     }
+   public string getDescription()
+    {
+        return description;
+    }
 
 }

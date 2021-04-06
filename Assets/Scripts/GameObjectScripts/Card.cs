@@ -7,14 +7,18 @@ public class Card : MonoBehaviour
 
     private ChanceCardGameplayComponent _cardGameplay;
     private ChanceCardRenderComponent _chanceCardRenderComponent;
-    
+
     public void instantiateOnBoard(ChanceCardGameplayComponent chanceCardGameplayComponent,
         ChanceCardRenderComponent chanceCardRenderComponent)
     {
         this._cardGameplay = chanceCardGameplayComponent;
         this._chanceCardRenderComponent = chanceCardRenderComponent;
         this._chanceCardRenderComponent.draw(GetComponent<SpriteRenderer>(),
-            titleMesh);
-        
+            titleMesh, descriptionMesh);
+    }
+
+    public void delete()
+    {
+        Destroy(this);
     }
 }

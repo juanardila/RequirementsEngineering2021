@@ -63,4 +63,38 @@ public class FileManager : MonoBehaviour
         }
         return events;
     }
+
+    public Tuple<int, string, string>[] parseProblems()
+    {
+        JSONNode jsonProblems = _json["cards"]["problem"];
+        Tuple<int, string, string>[] problems =
+            new Tuple<int, string, string>[jsonProblems.Count];
+        for (int index = 0; index < jsonProblems.Count; ++index)
+        {
+            problems[index] = new Tuple<int, string, string>(
+                jsonProblems[index]["id"].AsInt,
+                jsonProblems[index]["title"].Value,
+                jsonProblems[index]["description"].Value
+            );
+        }
+
+        return problems;
+    }
+    
+    public Tuple<int, string, string>[] parseSolutions()
+    {
+        JSONNode jsonProblems = _json["cards"]["solution"];
+        Tuple<int, string, string>[] solutions =
+            new Tuple<int, string, string>[jsonProblems.Count];
+        for (int index = 0; index < jsonProblems.Count; ++index)
+        {
+            solutions[index] = new Tuple<int, string, string>(
+                jsonProblems[index]["id"].AsInt,
+                jsonProblems[index]["title"].Value,
+                jsonProblems[index]["description"].Value
+            );
+        }
+        return solutions;
+    }
+    
 }

@@ -5,7 +5,7 @@ using System;
 public abstract class Command
 {
     protected Board board;
-    protected IterationGameplay iterationGameplay;
+    protected IterationGameplayComponent iterationGameplay;
     protected Command()
     {
         board = Board.getInstance();
@@ -18,6 +18,8 @@ public abstract class Command
         {
             case ChanceCardGameplayComponent.EventCode.ADD_2_ROLL:
                 return new CommandAdd2Roll();
+            case ChanceCardGameplayComponent.EventCode.PROBLEM:
+                return new CommandProblem();
             default:
                 //throw new Exception("Invalid Event Code");
                 return new CommandAdd2Roll();

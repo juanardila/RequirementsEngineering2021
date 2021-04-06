@@ -1,25 +1,26 @@
 ﻿public class IterationInputHandler
 {
-    private Iteration iteraton;
+    private Iteration iteration;
 
     public IterationInputHandler()
     {
-        iteraton = Iteration.getInstance();
+        iteration = Iteration.getInstance();
     }
 
     public void rollDices()
     {
-        iteraton.getGameplaycomponent().rollDices();
+        iteration.getGameplaycomponent().getRound().getTurn().rollDices();
     }
 
     public void startDayOrAdvancePhase()
     {
-        iteraton.getGameplaycomponent().advanceDay();
+        iteration.getGameplaycomponent().getRound().endRound();
     }
 
     public void nextTurn()
     {
-        Iteration.getInstance().getGameplaycomponent().nextPlayerWorks();
+        iteration.getGameplaycomponent()
+            .getRound().getTurn().finishTurn();
         
     }
 }
