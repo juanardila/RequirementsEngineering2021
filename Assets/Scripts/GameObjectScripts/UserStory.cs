@@ -86,7 +86,7 @@ public class UserStory : MonoBehaviour
                 .GetComponent<Card>().getChanceCardGameplayComponent().getId();
             
             //Send deleted one problem with userstory id solution id
-            
+            IterationNetworkComponent.sendUseSolution(userStoryId);
             Destroy(_userStoryGameplayComponent.deleteProblem());
             Destroy(other.gameObject);
         }

@@ -80,16 +80,31 @@ public class GameManager : MonoBehaviour, IOnEventCallback
     public void OnEvent(EventData photonEvent)
     {
         byte eventCode = photonEvent.Code;
+        object[] data = (object[])photonEvent.CustomData;
         switch (eventCode)
         {
             case UserStoryNetworkingComponent.MOVECARD_CODE:
-                object[] data = (object[])photonEvent.CustomData;
                 UserStoryGameplayComponent.moveToColumn((int)data[0],(string) data[1],(string) data[2] );
                 break;
             case SprintNetworkComponent.STARTWORKWITHINITERATION_CODE:
                 Sprint.getInstance().getGameplayComponent().advanceToWorkWithInIteration();
                 break;
-
+            case IterationNetworkComponent.TURNPLAYED_CODE:
+                Iteration.getInstance().getGameplaycomponent().getRound()
+                    .finishRemoteTurn((int)data[0], (int) data[1], (int) data[2]);
+                break;
+            case IterationNetworkComponent.FINISHTURN_CODE:
+                Iteration.getInstance().getGameplaycomponent().getRound().endRound();
+                break;
+            case IterationNetworkComponent.USESOLUTION_CODE:
+                UserStoryGameplayComponent.getUserStoryGameplayComponent((int) data[0]).deleteProblem();
+                GameObject solution =  Solution.solutions[0];
+                Solution.solutions.RemoveAt(0);
+                Destroy(solution);
+                break;
+            case SprintNetworkComponent.STARTPLANNING:
+                Sprint.getInstance().getGameplayComponent().advanceToSprintPlanning();
+                break;
         }
     }
 }

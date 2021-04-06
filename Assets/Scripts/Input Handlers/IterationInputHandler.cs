@@ -15,6 +15,7 @@
     public void startDayOrAdvancePhase()
     {
         iteration.getGameplaycomponent().getRound().endRound();
+        IterationNetworkComponent.sendEndIteration();
     }
 
     public void nextTurn()

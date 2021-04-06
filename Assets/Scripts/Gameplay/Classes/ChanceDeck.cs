@@ -35,4 +35,9 @@ public class ChanceDeck
         return chanceCards[cardId];
     }
 
+    public void deleteFromDeck(int cardId)
+    {
+        stackOfCards.Remove(cardId);
+    }
+
 }

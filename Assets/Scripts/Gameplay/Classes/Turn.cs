@@ -52,8 +52,8 @@ public class Turn
                     iterationRendererComponent.hidePlayerIndicator(playerIndex);
                     hideAvailableUserStories();
                     Board.getInstance().deleteInstantiatedCard(cardDrawnGameObject);
+                    IterationNetworkComponent.sendTurnInfo(selectedStory.id, diceResult, cardDrawnId );
                     round.finishLocalTurn();
-                    //iteration network component
                     break;
             }
         } 

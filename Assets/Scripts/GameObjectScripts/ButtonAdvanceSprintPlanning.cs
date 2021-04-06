@@ -12,5 +12,6 @@ public class ButtonAdvanceSprintPlanning : MonoBehaviour
     private void OnMouseDown()
     {
         _sprintInputHandler.onAdvanceToSprintPlanningClick();
+        SprintNetworkComponent.sendStartPlanning();
     }
 }

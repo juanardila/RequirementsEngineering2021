@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Pun.Demo.Cockpit;
+using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
+using UnityEngine;
 
 public class Round
 {
@@ -79,10 +81,7 @@ public class Round
         }
     }
 
-    public void end()
-    {
-        
-    }
+   
 
     public void finishLocalTurn()
     {
@@ -91,11 +90,16 @@ public class Round
         {
             playerPlayingIndex++;
         }
-
+        
         if (!isOver())
         {
             turn = new Turn(iterationRendererComponent, this);
             iterationRendererComponent.showPlayerIndicator(playerPlayingIndex);
+            if (localPlayerIsWorking())
+            {
+                turn.play(playerPlayingIndex);
+            }
+                
         }
         else
         {
@@ -105,10 +109,13 @@ public class Round
     
     public void finishRemoteTurn(int userStoryId, int rollValue, int chanceCardId)
     {
+        iterationRendererComponent.hidePlayerIndicator(playerPlayingIndex);
         turn.setDrawnCardId(chanceCardId);
+        Board.getInstance().chanceDeck.deleteFromDeck(chanceCardId);
         turn.setSelectedUserStory(UserStoryGameplayComponent.getUserStoryGameplayComponent(userStoryId));
-        
-        
+        turn.getSelectedStory().setPoints(turn.getSelectedStory().points - rollValue);
+        Board.getInstance().chanceDeck.getChanceCard(chanceCardId)
+            .chanceCardGameplayComponent.followInstructions();
         finishLocalTurn();
     }
 
