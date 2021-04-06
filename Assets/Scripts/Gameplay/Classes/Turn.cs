@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Turn
 {
@@ -16,14 +17,15 @@ public class Turn
     private int playingPlayerIndex;
     private UserStoryGameplayComponent selectedStory;
     private int diceResult;
-    private int cardDrawn;
+    private int cardDrawnId;
+    private GameObject cardDrawnGameObject;
     public  Turn(IterationRendererComponent iterationRendererComponent, Round round)
     {
         this.iterationRendererComponent = iterationRendererComponent;
         turnState = TurnState.STARTED_TURN;
         selectedStory = null;
         diceResult = 0;
-        cardDrawn = 0;
+        cardDrawnId = 0;
         this.round = round;
     }
 
@@ -49,11 +51,12 @@ public class Turn
                     iterationRendererComponent.hideFinishTurn();
                     iterationRendererComponent.hidePlayerIndicator(playerIndex);
                     hideAvailableUserStories();
+                    Board.getInstance().deleteInstantiatedCard(cardDrawnGameObject);
                     round.finishLocalTurn();
                     //iteration network component
                     break;
             }
-        }
+        } 
         else
         {
             iterationRendererComponent.showPlayerIndicator(playerIndex);
@@ -88,9 +91,18 @@ public class Turn
 
     public void workInThisStory(UserStoryGameplayComponent userStoryGameplayComponent)
     {
+        if (selectedStory != null)
+        {
+            selectedStory.setAvailableToWork();
+        }
         selectedStory = userStoryGameplayComponent;
         turnState = TurnState.SELECTED_USER_STORY;
         play();
+    }
+
+    public UserStoryGameplayComponent getSelectedStory()
+    {
+        return selectedStory;
     }
 
     public void rollDices()
@@ -100,7 +112,15 @@ public class Turn
          int secondRollValue = Dice.getInstance().
              getSecondDiceGameplayComponent().rollDice();
         setDiceResult(firstRollValue + secondRollValue);
-        cardDrawn = Board.getInstance().chanceDeck.drawCard();
+        
+        //
+        cardDrawnId = Board.getInstance().chanceDeck.drawFromDeck();
+        ChanceCard cardDrawn = Board.getInstance().chanceDeck.getChanceCard(cardDrawnId);
+        cardDrawn.chanceCardGameplayComponent.followInstructions();
+        cardDrawnGameObject = Board.getInstance().showCard(cardDrawn);
+        //
+        this.selectedStory.setPoints(selectedStory.points - diceResult);
+        
         turnState = TurnState.ROLLED_DICES;
         play();
     }
@@ -121,7 +141,35 @@ public class Turn
     {
         setDiceResult(diceResult + add);
     }
+
+    public void setDrawnCard(GameObject gameObject)
+    {
+        cardDrawnGameObject = gameObject;
+    }
+
+    public int getDrawnCardId()
+    {
+        return cardDrawnId;
+    }
     
-    
+    public void setDrawnCardId(int drawnCardId)
+    {
+        this.cardDrawnId = drawnCardId;
+    }
+
+    public void setSelectedUserStory(UserStoryGameplayComponent userStoryGameplayComponent)
+    {
+        selectedStory = userStoryGameplayComponent;
+    }
+
+    public int currentPlayer()
+    {
+        return playingPlayerIndex;
+    }
+
+    public int getDiceResult()
+    {
+        return diceResult;
+    }
 }
 

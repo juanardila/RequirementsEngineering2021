@@ -19,6 +19,15 @@ class SprintInputHandler
             sprintNetworkComponent.sendAdvanceToWorkInIteration();
         }
     }
+    
+    public void onAdvanceToSprintPlanningClick()
+    {
+        if (sprint.getGameplayComponent().getPhase() == SprintGameplay.Phase.SpringReviewAndRetrospective)
+        {
+            sprint.getGameplayComponent().advanceToSprintPlanning();
+            sprintNetworkComponent.sendAdvanceToWorkInIteration();
+        }
+    }
 
     public void nextTurn()
     {

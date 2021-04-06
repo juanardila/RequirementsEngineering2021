@@ -7,23 +7,7 @@ public class ChanceCardGameplayComponent
     private string title;
     private string description;
 
-    public enum EventCode
-    {
-        ROLL_AGAIN = 1,
-        ADD_2_ROLL,
-        RESOLVED_CARD,
-        ADD_4_ROLL,
-        ADD_3_ROLL,
-        PLAYER_SKIPS_NEXT,
-        REMOVE_PROGRESS_CARD,
-        EVERYONE_SKIPS_NEXT,
-        ADD_4_ESTIMATION,
-        ADD_6_ESTIMATION,
-        DRAW_AGAIN,
-        //Command for solution and error
-        SOLUTION = 998,
-        PROBLEM
-    };
+
 
     public ChanceCardGameplayComponent(string title, string description, Command command)
     {
@@ -50,4 +34,8 @@ public class ChanceCardGameplayComponent
         return description;
     }
 
+   public int getId()
+   {
+       return id;
+   }
 }

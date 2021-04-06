@@ -30,7 +30,18 @@ public class ColumnRenderComponent
 
     public void positionNewStory(Transform userStoryTransform, int storiesInColumn)
     {
-        userStoryTransform.localPosition = new Vector3(columnPosition.x, columnPosition.y, userStoryTransform.localPosition.z);
+        userStoryTransform.localPosition = new Vector3(columnPosition.x, columnPosition.y  + columnCollider.bounds.size.y / 2 - storiesInColumn * 6f, userStoryTransform.localPosition.z);
+        
+    }  
+    
+    public void positionNewStory(Transform userStoryTransform, List<GameObject> problems, int storiesInColumn)
+    {
+        userStoryTransform.localPosition = new Vector3(columnPosition.x, columnPosition.y + (columnCollider.bounds.size.y / 2) - ((storiesInColumn - 1) * 16f), userStoryTransform.localPosition.z);
+        foreach (GameObject problem in problems)
+        {
+            problem.transform.localPosition = new Vector3(columnPosition.x + 6, columnPosition.y + 6 + (columnCollider.bounds.size.y / 2) - ((storiesInColumn - 1) * 16f), userStoryTransform.localPosition.z );
+        }
+        
     }
 
     public void shiftStoriesUp(int deletedId, LinkedList<StoryNode> userStoriesList)

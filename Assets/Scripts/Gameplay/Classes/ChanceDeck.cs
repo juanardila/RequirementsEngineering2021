@@ -4,26 +4,35 @@ using System.Data;
 public class ChanceDeck
 {
     private Dictionary<int, ChanceCard> chanceCards;
-    private Queue<int> stackOfCards;
+    private List<int> stackOfCards;
 
     public ChanceDeck()
     {
         chanceCards = new Dictionary<int, ChanceCard>();
-        stackOfCards = new Queue<int>();
+        stackOfCards = new List<int>();
     }
 
     public void addCard(int cardId, ChanceCard card)
     {
-        stackOfCards.Enqueue(cardId);
+        stackOfCards.Add(cardId);
         chanceCards.Add(cardId, card);
     }
 
-    public int drawCard()
+    public int drawFromDeck()
     {
-        int drawnCard = stackOfCards.Dequeue();
-        Board.getInstance().showCard(chanceCards[drawnCard]);
-        int result = chanceCards[drawnCard].chanceCardGameplayComponent.followInstructions();
-        return (drawnCard == 0)? drawnCard : result;
+        int drawnCard = stackOfCards[0];
+        stackOfCards.RemoveAt(0);
+        return drawnCard;
+    }
+
+    public List<int> getStackOfCards()
+    {
+        return stackOfCards;
+    }
+
+    public ChanceCard getChanceCard(int cardId)
+    {
+        return chanceCards[cardId];
     }
 
 }

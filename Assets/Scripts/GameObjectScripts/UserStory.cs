@@ -1,4 +1,5 @@
-﻿using ExitGames.Client.Photon;
+﻿using System;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -74,5 +75,20 @@ public class UserStory : MonoBehaviour
     {
         return _userStoryInteractionComponent;
     }
-    
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.CompareTag(Solution.TAG) && 
+            _userStoryGameplayComponent.haveProblems())
+        {
+            int userStoryId = _userStoryGameplayComponent.id;
+            int  solutionId = other.gameObject
+                .GetComponent<Card>().getChanceCardGameplayComponent().getId();
+            
+            //Send deleted one problem with userstory id solution id
+            
+            Destroy(_userStoryGameplayComponent.deleteProblem());
+            Destroy(other.gameObject);
+        }
+    }
 }

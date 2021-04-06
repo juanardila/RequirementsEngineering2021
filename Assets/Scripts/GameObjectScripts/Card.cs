@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 public class Card : MonoBehaviour
 {
@@ -20,5 +21,10 @@ public class Card : MonoBehaviour
     public void delete()
     {
         Destroy(this);
+    }
+
+    public ChanceCardGameplayComponent getChanceCardGameplayComponent()
+    {
+        return _cardGameplay;
     }
 }

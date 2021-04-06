@@ -167,13 +167,6 @@
                 "description":"It is your birthday today. Subtract 1 point from everybody's dice roll today.",
                 "event_code":12,
                 "face":2
-            }, 
-            {
-                "id":28,
-                "title":"OVERTIME",
-                "description":"You have worked overtime. Draw another card and follow its instruction.",
-                "event_code":13,
-                "face":2
             }
         ],
         "solution":[

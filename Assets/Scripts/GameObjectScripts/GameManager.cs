@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -48,15 +47,35 @@ public class GameManager : MonoBehaviour, IOnEventCallback
         foreach(Tuple<int, string, string> entry in problems)
         {
             ChanceCard chanceCard = new ChanceCard();
+            
             chanceCard.chanceCardGameplayComponent = new ChanceCardGameplayComponent( entry.Item2,
-                entry.Item3, Command.CommandFactory((int)ChanceCardGameplayComponent.EventCode.PROBLEM));
+                entry.Item3, Command.CommandFactory(Command.EventCode.PROBLEM));
+            
             chanceCard.chanceCardRendererComponent = new ChanceCardRenderComponent(
                 ChanceCardRenderComponent.CardType.PROBLEM, chanceCard.chanceCardGameplayComponent );
             Board.getInstance().chanceDeck.addCard(entry.Item1, chanceCard);
         }
         
+        Tuple<int, string, string>[] solutions = FileManager.getInstance().parseSolutions();
+        foreach(Tuple<int, string, string> entry in solutions)
+        {
+            ChanceCard chanceCard = new ChanceCard();
+            
+            chanceCard.chanceCardGameplayComponent = new ChanceCardGameplayComponent( entry.Item2,
+                entry.Item3, Command.CommandFactory(Command.EventCode.SOLUTION));
+            
+            chanceCard.chanceCardRendererComponent = new ChanceCardRenderComponent(
+                ChanceCardRenderComponent.CardType.SOLUTION, chanceCard.chanceCardGameplayComponent );
+            Board.getInstance().chanceDeck.addCard(entry.Item1, chanceCard);
+        }
+
         
+        
+        
+        Util.Shuffle(Board.getInstance().chanceDeck.getStackOfCards());
     }
+    
+    
     
     public void OnEvent(EventData photonEvent)
     {

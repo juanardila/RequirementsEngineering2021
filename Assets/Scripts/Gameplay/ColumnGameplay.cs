@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -50,7 +52,7 @@ public class ColumnGameplayComponent
                 break;
             case DONE_TAG:
                 if(columnTag != DONE_TAG)
-                    moveCardsToColumn(Board.getInstance().done.GetComponent<Column>().getGameplayComponent());
+                    moveCardsToDone();
                 break;
         }       
         
@@ -64,8 +66,46 @@ public class ColumnGameplayComponent
         int storyIndex = 1; //for simulating insertion one by one
         foreach (StoryNode storyNode in newColumn.userStoriesList )
         {
-            newColumn.columnRenderComponent.positionNewStory(storyNode.userStoryTransform, storyIndex++);
+            newColumn.columnRenderComponent.positionNewStory(storyNode.userStoryTransform, 
+                storyNode.userStoryGameplayComponent.getProblems(), storyIndex++);
         }
+    }
+
+    private void moveCardsToDone()
+    {
+        ColumnGameplayComponent done = Board.getInstance().done.gameObject.GetComponent<Column>().getGameplayComponent();
+        ColumnGameplayComponent toDo = Board.getInstance().toDo.gameObject.GetComponent<Column>().getGameplayComponent();
+        ColumnGameplayComponent onProgress = Board.getInstance().onProgress.gameObject.GetComponent<Column>().getGameplayComponent();
+        
+        toDo.userStoriesList = new LinkedList<StoryNode>(onProgress.userStoriesList);
+        onProgress.userStoriesList = new LinkedList<StoryNode>();
+        int storyIndex = 1;
+        foreach (StoryNode storyNode in toDo.userStoriesList )
+        {
+            toDo.columnRenderComponent.positionNewStory(storyNode.userStoryTransform, storyNode.userStoryGameplayComponent.getProblems(), storyIndex++);
+        }
+        storyIndex = 1;
+       
+        foreach (StoryNode storyNode in toDo.userStoriesList)
+        {
+            if (storyNode.userStoryGameplayComponent.isDone())
+            {
+                done.columnRenderComponent.positionNewStory(storyNode.userStoryTransform,
+                    storyNode.userStoryGameplayComponent.getProblems(), storyIndex++);
+            }
+        }
+        
+        
+        foreach (StoryNode storyNode in done.userStoriesList)
+        {
+            if (done.userStoriesList.Contains(storyNode))
+            {
+                done.userStoriesList.Remove(storyNode);
+                done.userStoriesList = new LinkedList<StoryNode>(done.userStoriesList);
+            }
+        }
+        
+
     }
 
     public void add(UserStoryGameplayComponent userStory, Transform userStoryTransform)
@@ -84,6 +124,29 @@ public class ColumnGameplayComponent
     public LinkedList<StoryNode> getStories()
     {
         return userStoriesList;
+    }
+
+    public int sum()
+    {
+        int sum = 0;
+        foreach(StoryNode storyNode in userStoriesList )
+        {
+            sum += storyNode.userStoryGameplayComponent.originalPoints;
+        }
+
+        return sum;
+    }
+    
+    public int sumFinished()
+    {
+        int sum = 0;
+        foreach(StoryNode storyNode in userStoriesList )
+        {
+            if(storyNode.userStoryGameplayComponent.isDone())
+                sum += storyNode.userStoryGameplayComponent.originalPoints;
+        }
+
+        return sum;
     }
 
 }

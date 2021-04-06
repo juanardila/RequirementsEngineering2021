@@ -11,6 +11,7 @@ public class Board : MonoBehaviour
     public GameObject onProgress;
     public GameObject done;
     public ChanceDeck chanceDeck;
+    public GameObject solutionDeck;
     
     public GameObject cardPrefab;
     
@@ -59,17 +60,18 @@ public class Board : MonoBehaviour
     
     private GameObject instantiatedCard;
 
-    public void showCard(ChanceCard chanceCard)
+    public GameObject showCard(ChanceCard chanceCard)
     {
         instantiatedCard = Instantiate(cardPrefab);
         Card cardComponent = instantiatedCard.GetComponent<Card>();
         cardComponent.instantiateOnBoard(chanceCard.chanceCardGameplayComponent, chanceCard.chanceCardRendererComponent);
+        return instantiatedCard;
     }
 
-    public void deleteInstantiatedCard()
+    public void deleteInstantiatedCard(GameObject deleteCard)
     {
-        Destroy(instantiatedCard);
+        Destroy(deleteCard);
     }
-    
+
 
 }

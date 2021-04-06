@@ -31,6 +31,8 @@ public class CollumnCollisionComponent
                 userStoryInteraction.beingDraggedOver(columnGameplayComponent.getColumnTag());
             }
         }
+
+       
     }
 
     public void onCollisionExit(Collision2D other)
